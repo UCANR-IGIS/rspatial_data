@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>sf_permitted_cannabis_dispensaries_2014.kml</name>
+	<Style id="defaultStyle">
+		<LineStyle>
+			<width>1.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>7d8a30c4</color>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<name>Cannabis Dispensaries 2014</name>
+		<open>1</open>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Tenderloin</value>
+				</Data>
+				<Data name="business_n">
+					<value>Grass Roots</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>532.593654</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.39280575812</value>
+				</Data>
+				<Data name="id_2">
+					<value>1.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>0693017</value>
+				</Data>
+				<Data name="zip">
+					<value>94109</value>
+				</Data>
+				<Data name="business_z">
+					<value>94109</value>
+				</Data>
+				<Data name="business_a">
+					<value>1077 Post St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.7%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Grass Roots Nonprofit Collective, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4194132797827,37.78662965327916,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Hayes Valley</value>
+				</Data>
+				<Data name="business_n">
+					<value>Good Fellows Cannabis Club</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>332.407882</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.49039175549</value>
+				</Data>
+				<Data name="id_2">
+					<value>2.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>0859038</value>
+				</Data>
+				<Data name="zip">
+					<value>94117</value>
+				</Data>
+				<Data name="business_z">
+					<value>94117</value>
+				</Data>
+				<Data name="business_a">
+					<value>473 Haight St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>3.0%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Mohamed Khatib</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4298778642076,37.77189194436478,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Hayes Valley</value>
+				</Data>
+				<Data name="business_n">
+					<value>BASA</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>332.407882</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.49039175549</value>
+				</Data>
+				<Data name="id_2">
+					<value>3.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>1182005</value>
+				</Data>
+				<Data name="zip">
+					<value>94117</value>
+				</Data>
+				<Data name="business_z">
+					<value>94117</value>
+				</Data>
+				<Data name="business_a">
+					<value>1328 Grove St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>3.0%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Bay Area Safe Alternatives Collective, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4385234945558,37.77606702194213,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Inner Richmond</value>
+				</Data>
+				<Data name="business_n">
+					<value>Hemp Center (aka Patient Place)</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>375.99867</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.74405833088</value>
+				</Data>
+				<Data name="id_2">
+					<value>4.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>1532032F</value>
+				</Data>
+				<Data name="zip">
+					<value>94118</value>
+				</Data>
+				<Data name="business_z">
+					<value>94118</value>
+				</Data>
+				<Data name="business_a">
+					<value>4811 Geary Blvd</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.6%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Kathleen Cappetti</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4711317429207,37.7804004970458,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>West of Twin Peaks</value>
+				</Data>
+				<Data name="business_n">
+					<value>1944 Ocean Collective</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>346.089584</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>3.05841813518</value>
+				</Data>
+				<Data name="id_2">
+					<value>5.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3281020C</value>
+				</Data>
+				<Data name="zip">
+					<value>94127</value>
+				</Data>
+				<Data name="business_z">
+					<value>94127</value>
+				</Data>
+				<Data name="business_a">
+					<value>1944 Ocean Ave</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>5.2%</value>
+				</Data>
+				<Data name="business_o">
+					<value>1944 Ocean, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4635424309064,37.72602894819491,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Ketama Collective</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>6.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3503003</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>14 Valencia St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Ketama Cooperative, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4228656633051,37.77187451788744,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>San Francisco Med Cannabis Clinic</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>7.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3510059</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>122 10th Street</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Robert Martin</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4158289675155,37.77471790613143,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Green Cross</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Delivery</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>8.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3516005</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>230 11th Street</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Bay Area Cross Dispensary, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4152920894719,37.77253161491967,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>SF Foundation on Going Green</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>9.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3516053</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>211 12th Street</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>San Francisco Foundation on Going Green</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4165499896795,37.77175941108176,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Valencia Street Caregivers</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>10.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3533136</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>280 Valencia St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>280 Valencia Street Caregivers (CASIP)</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4225934045848,37.7685208393546,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Love Shack</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>11.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3534014</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>502 14th St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>The Love Shack Cooperative</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4247023065871,37.76813903041374,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Castro/Upper Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>The Apothecarium</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>368.350377</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.85717993762</value>
+				</Data>
+				<Data name="id_2">
+					<value>12.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3544065</value>
+				</Data>
+				<Data name="zip">
+					<value>94114</value>
+				</Data>
+				<Data name="business_z">
+					<value>94114</value>
+				</Data>
+				<Data name="business_a">
+					<value>2095 Market St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.6%</value>
+				</Data>
+				<Data name="business_o">
+					<value>RHMT, LLC</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4286110473127,37.76732690675256,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Med Thrive Co-op</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>13.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3553023</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>1933 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Med Thrive Cooperative, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4194239299651,37.76616901981341,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Shambala Healing Center</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>14.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3610026</value>
+				</Data>
+				<Data name="zip">
+					<value>94110</value>
+				</Data>
+				<Data name="business_z">
+					<value>94110</value>
+				</Data>
+				<Data name="business_a">
+					<value>2441 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Shambala Healing Center, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.418630582303,37.75793853636608,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Purple Star MCD Collective</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>558.857764</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.77128599546</value>
+				</Data>
+				<Data name="id_2">
+					<value>15.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3616061</value>
+				</Data>
+				<Data name="zip">
+					<value>94110</value>
+				</Data>
+				<Data name="business_z">
+					<value>94110</value>
+				</Data>
+				<Data name="business_a">
+					<value>2522 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>2.5%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Purple Star MD Collective</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4192716466773,37.75661589791826,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>SPARC</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>16.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3701008</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>1256 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Bay Pacific Networks, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<gx:balloonVisibility>1</gx:balloonVisibility>
+			<Point>
+				<coordinates>-122.414225081614,37.7769608418043,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>Re-leaf Herbal</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Delivery</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>17.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3701022</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>1284 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Re-Leaf Herbal Center</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4146778930921,37.77655429293632,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>Barbary Coast Collective</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>18.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3704017</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>952 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>BCSF, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4078592222111,37.78205624539241,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>Bloom Room</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>19.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3704028</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>471 Jessie St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Jessie St. Collective</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4082875677529,37.78194161699519,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Financial District/South Beach</value>
+				</Data>
+				<Data name="business_n">
+					<value>70 Second St</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>592.373193</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.12358378781</value>
+				</Data>
+				<Data name="id_2">
+					<value>20.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3707009</value>
+				</Data>
+				<Data name="zip">
+					<value>94105</value>
+				</Data>
+				<Data name="business_z">
+					<value>94105</value>
+				</Data>
+				<Data name="business_a">
+					<value>70 02nd Street</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>6.4%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Seventy Second Street</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4004426280976,37.78822651455405,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>South of Market</value>
+				</Data>
+				<Data name="business_n">
+					<value>Green Door, the</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>413.018159</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>0.88497891523</value>
+				</Data>
+				<Data name="id_2">
+					<value>21.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3733082</value>
+				</Data>
+				<Data name="zip">
+					<value>94103</value>
+				</Data>
+				<Data name="business_z">
+					<value>94103</value>
+				</Data>
+				<Data name="business_a">
+					<value>843 Howard St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.1%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Soma United Group</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4035278374564,37.78228184866846,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Financial District/South Beach</value>
+				</Data>
+				<Data name="business_n">
+					<value>Igzactly Health Center</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>592.373193</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.12358378781</value>
+				</Data>
+				<Data name="id_2">
+					<value>22.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>3736083</value>
+				</Data>
+				<Data name="zip">
+					<value>94105</value>
+				</Data>
+				<Data name="business_z">
+					<value>94105</value>
+				</Data>
+				<Data name="business_a">
+					<value>527 Howard St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>6.4%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Igzactly Enterprises, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.39641441032,37.787741576677,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Bernal Heights</value>
+				</Data>
+				<Data name="business_n">
+					<value>Mission Herbal Care</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>318.067603</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.07792527053</value>
+				</Data>
+				<Data name="id_2">
+					<value>23.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>5501046</value>
+				</Data>
+				<Data name="zip">
+					<value>94110</value>
+				</Data>
+				<Data name="business_z">
+					<value>94110</value>
+				</Data>
+				<Data name="business_a">
+					<value>3139 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.7%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Mission Herbal Care, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4186528206712,37.74699804741445,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Bernal Heights</value>
+				</Data>
+				<Data name="business_n">
+					<value>Bernal Heights Cooperative</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>318.067603</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.07792527053</value>
+				</Data>
+				<Data name="id_2">
+					<value>24.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>6635051</value>
+				</Data>
+				<Data name="zip">
+					<value>94110</value>
+				</Data>
+				<Data name="business_z">
+					<value>94110</value>
+				</Data>
+				<Data name="business_a">
+					<value>33 29th St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>4.7%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Bernal Heights Cooperative, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4216292310074,37.74382352829187,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Outer Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>The Green Cross</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>244.010246</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.0041569739</value>
+				</Data>
+				<Data name="id_2">
+					<value>25.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>6803004</value>
+				</Data>
+				<Data name="zip">
+					<value>94112</value>
+				</Data>
+				<Data name="business_z">
+					<value>94112</value>
+				</Data>
+				<Data name="business_a">
+					<value>4218 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>9.3%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Bay Area Cross Dispensary, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4306453071126,37.72977412109174,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Oceanview/Merced/Ingleside</value>
+				</Data>
+				<Data name="business_n">
+					<value>Waterfall Wellness</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>257.974805</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.05329172581</value>
+				</Data>
+				<Data name="id_2">
+					<value>26.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>6936011</value>
+				</Data>
+				<Data name="zip">
+					<value>94112</value>
+				</Data>
+				<Data name="business_z">
+					<value>94112</value>
+				</Data>
+				<Data name="business_a">
+					<value>1545 Ocean Ave</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>6.6%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Waterfall Wellness Cooperative</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4589621611546,37.72418825884432,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Outer Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Tree-Med, Inc</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>244.010246</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.0041569739</value>
+				</Data>
+				<Data name="id_2">
+					<value>27.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>7031002C</value>
+				</Data>
+				<Data name="zip">
+					<value>94112</value>
+				</Data>
+				<Data name="business_z">
+					<value>94112</value>
+				</Data>
+				<Data name="business_a">
+					<value>5234 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>9.3%</value>
+				</Data>
+				<Data name="business_o">
+					<value>MSMTA, Inc.</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4421778245459,37.71539174518049,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<styleUrl>#defaultStyle</styleUrl>
+			<ExtendedData>
+				<Data name="neighborho">
+					<value>Outer Mission</value>
+				</Data>
+				<Data name="business_n">
+					<value>Mission Organics Center</value>
+				</Data>
+				<Data name="business_t">
+					<value>Medical Cannabis Dispensary</value>
+				</Data>
+				<Data name="business_s">
+					<value>California</value>
+				</Data>
+				<Data name="number_o_3">
+					<value>244.010246</value>
+				</Data>
+				<Data name="location_t">
+					<value>Fixed</value>
+				</Data>
+				<Data name="sqmi">
+					<value>1.0041569739</value>
+				</Data>
+				<Data name="id_2">
+					<value>28.0</value>
+				</Data>
+				<Data name="business_b">
+					<value>7031003B</value>
+				</Data>
+				<Data name="zip">
+					<value>94112</value>
+				</Data>
+				<Data name="business_z">
+					<value>94112</value>
+				</Data>
+				<Data name="business_a">
+					<value>5258 Mission St</value>
+				</Data>
+				<Data name="cv_for_n_1">
+					<value>9.3%</value>
+				</Data>
+				<Data name="business_o">
+					<value>Mission Organics Center, Inc</value>
+				</Data>
+				<Data name="business_c">
+					<value>San Francisco</value>
+				</Data>
+				<Data name="permitting">
+					<value>SFDPH</value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-122.4424184059655,37.71517896740453,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

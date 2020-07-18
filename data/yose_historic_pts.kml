@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="yose_historic_places" id="yose_historic_places">
+	<SimpleField name="prop_type" type="string"></SimpleField>
+	<SimpleField name="status" type="string"></SimpleField>
+	<SimpleField name="date" type="string"></SimpleField>
+	<SimpleField name="period" type="string"></SimpleField>
+</Schema>
+<Folder><name>yose_historic_places</name>
+  <Placemark>
+	<name>Hetch Hetchy Railroad Engine No. 6</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Structure</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/01/30 08:00:00+00</SimpleData>
+		<SimpleData name="period">1921-1958</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.785988933732,37.6743693246562</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hodgdon Homestead Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Structure</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/07 07:00:00+00</SimpleData>
+		<SimpleData name="period">1879-1960</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.656014917807,37.5392400833091</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rangers' Club</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="period">1920-Present</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.588268498654,37.747349255532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Buck Creek Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1931-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.489683705666,37.5613148871922</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Wawona Covered Bridge</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Structure</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">2007/01/11 08:00:00+00</SimpleData>
+		<SimpleData name="period">1868-1933</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.655952441256,37.5385944390214</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Crane Flat Fire Lookout</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1996/04/04 08:00:00+00</SimpleData>
+		<SimpleData name="period">1931</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.820701190872,37.7597819783882</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Glacier Point Trailside Museum</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/04/04 08:00:00+00</SimpleData>
+		<SimpleData name="period">1924</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.573056912397,37.7291645665137</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>McCauley Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1977/03/08 08:00:00+00</SimpleData>
+		<SimpleData name="period">1902-1972</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.367613792536,37.8781213617794</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bagby Stationhouse</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1979/04/13 08:00:00+00</SimpleData>
+		<SimpleData name="period">1907</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.786155225463,37.6743852034062</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Great Sierra Mine</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Site</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/05/24 07:00:00+00</SimpleData>
+		<SimpleData name="period">1881-1884</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.268780944167,37.9275973628033</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Chris Jorgenson Studio</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1979/04/13 08:00:00+00</SimpleData>
+		<SimpleData name="period">1899-1918</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.656118563894,37.5389646305553</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>LeConte Memorial Lodge</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1977/03/08 08:00:00+00</SimpleData>
+		<SimpleData name="period">1903, 1919</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.579517560434,37.7398888254457</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mariposa Grove Museum</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/12/01 08:00:00+00</SimpleData>
+		<SimpleData name="period">1864-1930</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.598933665854,37.5135596561992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>McCauley Barn</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/15 07:00:00+00</SimpleData>
+		<SimpleData name="period">1875-1885</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.765714443606,37.6937270391718</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Meyer Barn #1</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/15 07:00:00+00</SimpleData>
+		<SimpleData name="period">1875-1885</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.751207177493,37.7031219757324</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Meyer Barn #2</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/15 07:00:00+00</SimpleData>
+		<SimpleData name="period">1875-1885</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.751437138283,37.7032067147992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>McGurk Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1979/06/04 07:00:00+00</SimpleData>
+		<SimpleData name="period">1895-1897</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.625225273979,37.6780303980362</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Merced Grove Ranger Station</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/15 07:00:00+00</SimpleData>
+		<SimpleData name="period">1934-present</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.840281547959,37.7487708635661</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Soda Springs Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1979/04/19 08:00:00+00</SimpleData>
+		<SimpleData name="period">1885-1889</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.366640962765,37.8787202010686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Track Bus No. 19</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Object</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/05/22 07:00:00+00</SimpleData>
+		<SimpleData name="period">1919</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.78598398642,37.6744862065291</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yosemite Transportation Company Office</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/09 07:00:00+00</SimpleData>
+		<SimpleData name="period">1910</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.656182018409,37.5391342228751</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yosemite Valley Chapel</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1973/12/12 08:00:00+00</SimpleData>
+		<SimpleData name="period">1879-present</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.591578731512,37.7409745277728</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yosemite Valley Railroad Caboose No. 15</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Object</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/05/22 07:00:00+00</SimpleData>
+		<SimpleData name="period">1922-1945</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.785932212146,37.6744419913881</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Acting Superintendent's Headquarters</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Listed</SimpleData>
+		<SimpleData name="date">1978/06/09 07:00:00+00</SimpleData>
+		<SimpleData name="period">1904</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.655655138116,37.5389960781378</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Substation and Substation Control House No. 1</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">1995/03/07 08:00:00+00</SimpleData>
+		<SimpleData name="period">1931-1981</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.602523967517,37.7396652159041</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Golden Crown Mine</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Site</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1874-1899</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.216505510386,37.851815463979</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Henness Ridge Fire Lookout</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1934-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.721667909102,37.6388999659372</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hetch Hetchy Comfort Station</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1934-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.783305309009,37.9460814663154</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lake Vernon Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1945</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.716254084082,38.0219950018435</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Merced Lake Ranger Station</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible </SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1927-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.39536135225,37.7381869780374</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ostrander Lake Ski Hut</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1940-1950</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.549959081116,37.6267924546916</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sachse Springs Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1947</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.844667264337,38.0836790456032</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Snow Creek Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1929-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.524432049936,37.787538510968</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Snow Flat Cabin</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1947</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.498025536842,37.827367515175</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>White Wolf Lodge</name>
+	<ExtendedData><SchemaData schemaUrl="#yose_historic_places">
+		<SimpleData name="prop_type">Building</SimpleData>
+		<SimpleData name="status">Eligible</SimpleData>
+		<SimpleData name="date">2004/08/23 07:00:00+00</SimpleData>
+		<SimpleData name="period">1915-1938</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-119.649176152219,37.8695327045297</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
