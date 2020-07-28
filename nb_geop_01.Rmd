@@ -25,10 +25,11 @@ First, load the libraries for this exercise.
 
 ```{r setup}
 library(sf)
+library(dplyr)
 library(units)
 library(tibble)
+library(tmap)
 ```
-
 
 Next, check the working directory used by the notebook. It should default to the location of the Rmd file (which in our case should be the parent folder of the 'data' folder).
 

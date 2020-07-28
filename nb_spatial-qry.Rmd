@@ -7,9 +7,10 @@ output:
 
 ```{r setup}
 library(sf)
+library(dplyr)
 library(units)
 library(tibble)
-library(dplyr)
+library(tmap)
 ```
 
 # Example: Find POIs that Intersect the Merced Watershed
