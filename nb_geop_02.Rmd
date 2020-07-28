@@ -1,0 +1,158 @@
+---
+title: "Geoprocessing II"
+output: 
+  html_notebook: 
+    css: nb.css
+---
+
+```{r setup}
+library(sf)
+library(units)
+library(tibble)
+```
+
+# Dissolve Boundaries Based on Attribute Fields
+
+First, (re)import the watersheds:
+
+```{r}
+## Import watersheds
+gpkg_watershd_fn <- "./data/yose_watersheds.gpkg"
+file.exists(gpkg_watershd_fn)
+yose_watersheds <- st_read(gpkg_watershd_fn, layer="calw221")
+```
+Next, group the rows of the **attribute table** (without geometry) on the 'HU' column (larger watershed ID), and compute the average watershed size.
+
+```{r}
+watersheds_df <- yose_watersheds %>% st_drop_geometry()
+hu_df <- watersheds_df %>% 
+  group_by(HU) %>% 
+  summarise(HUNAME = first(HUNAME), 
+            NUM_WATERSHEDS = n(),
+            AVG_ACRES = mean(ACRES))
+head(hu_df)
+```
+
+Do the same but this time with the **sf** object (i.e., keeping the geometry). The result is another **sf** object.
+
+```{r}
+hu_sf <- yose_watersheds %>% 
+  group_by(HU) %>% 
+  summarise(HUNAME = first(HUNAME), 
+            NUM_WATERSHEDS = n(),
+            AVG_ACRES = mean(ACRES))
+hu_sf
+```
+Plot the summarized watersheds:
+
+```{r}
+## Plot
+tm_shape(hu_sf) + 
+  tm_polygons(col="HUNAME", title="HU Watershed") + 
+tm_shape(yose_watersheds) +
+  tm_borders(col="gray60", lwd=0.8) +
+tm_layout(legend.outside = T)
+```
+# Example: Buffer, Union & Clip Yosemite's Roads
+
+In this example, we’ll create a 500m buffer around the roads within the park (representing a disturbance zone for sensitive species, or drive transect detection area), with the end goal of calculating the percent area of the entire park that lies within 500m of a road. 
+
+Import the roads and the park boundary:
+
+```{r}
+## Import the roads
+gdb_fn <- "./data/yose_roads.gdb"
+yose_roads <- st_read(gdb_fn, "Yosemite_Roads")
+
+## Define a convenience variable for UTM Zone 11
+epsg_utm11n_nad83 <- 26911
+
+## Import the YNP border
+yose_bnd_utm <- st_read(dsn="./data", layer="yose_boundary") %>% 
+  st_transform(epsg_utm11n_nad83)
+
+```
+
+Create the buffer:
+
+```{r}
+## Create the buffer
+yose_roads_buff <- yose_roads %>% st_buffer(dist=500)
+
+## Plot the results
+tm_shape(yose_roads_buff) + tm_polygons(col="red") +
+tm_shape(yose_bnd_utm) + tm_borders(lwd=2)
+```
+Clip to park boundary & union:
+
+```{r}
+yose_roads_inpark_buff <- yose_roads_buff %>%
+  st_intersection(yose_bnd_utm) %>% 
+  st_union()
+
+## Plot the results
+tm_shape(yose_bnd_utm) + 
+  tm_borders(lwd=2) +
+tm_shape(yose_roads_inpark_buff) +
+  tm_polygons(col="red")
+
+```
+What is the total area of the buffer?
+
+```{r}
+road_area <- yose_roads_inpark_buff %>% 
+  st_area() %>% 
+  sum()
+road_area
+```
+Express the area in ha:
+
+```{r}
+road_area %>% set_units(ha)
+```
+# YOUR TURN!
+
+How big is the buffered roads as a percentage of the total park area?
+
+```{r}
+## Road buffer areas as a percentage of the park
+
+```
+
+Answer: see https://ucanr-igis.github.io/rspatial_scgis20/geoprocessing2.html
+
+# Example: Voronoi tesselation Yosemite's Campgrounds
+
+First, import the campgrounds (projecting them to UTM Zone 11):
+
+```{r}
+## Define a convenience variable for UTM Zone 11
+epsg_utm11n_nad83 <- 26911
+
+## Import and project the campgrounds
+yose_campgrnds_utm <- st_read(dsn="./data", layer="yose_poi") %>% 
+  dplyr::filter(POITYPE == 'Campground') %>% 
+  dplyr::select(POINAME) %>% 
+  st_transform(epsg_utm11n_nad83)
+```
+
+Next, compute the Voronoi polygons:
+
+```{r}
+## Compute Voronoi polygons
+v <- st_voronoi(st_union(yose_campgrnds_utm))
+
+## Construct polygon sf and simplify (i.e., break multipart into single features)
+v_sf <-  st_sf(v) %>% st_cast()
+
+## Plot
+plot(v_sf %>% st_geometry() , col = NA, border="gray70")
+plot(yose_bnd_utm %>% st_geometry(), add=TRUE, col=NA, border="darkblue")
+plot(yose_campgrnds_utm %>% st_geometry(), col="darkgreen", cex=1, pch=17, add=T)
+```
+
+# End
+
+Click on the 'Preview' button in the RStudio toolbar to save a copy of your work as HTML.
+
+
