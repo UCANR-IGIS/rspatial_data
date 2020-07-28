@@ -3,3 +3,64 @@ h1 {
   font-weight: bold;
   color: dimgray;
 }
+
+
+# Spatial Join
+
+Import the vegetation layer
+
+```{r}
+## Import the vegetation layer
+yose_veg_utm <- st_read(dsn="./data", layer="veg37") 
+
+## Import the legend
+dbf_fn = file.path(".", "data", "veg37_alliances.dbf")
+file.exists(dbf_fn)
+yose_veg_leg <- foreign::read.dbf(file = dbf_fn)
+glimpse(yose_veg_utm)
+
+## Join the legend to the attribute table of the vegetation sf
+yose_veg_utm <- yose_veg_utm %>% left_join(yose_veg_leg, by = "ALLIANCE")
+glimpse(yose_veg_utm)
+
+## Plot it
+tm_shape(yose_veg_utm) +
+  tm_fill(col = "VEGETATION") +
+  tm_layout(title = "Yosemite NP Vegetation Classes",
+            legend.outside = TRUE,
+            legend.outside.position = "right")
+```
+
+Get the vegetation type for each campground:
+
+```{r}
+## Spatial join three fields from the veg layer
+yose_campgrnds_veg <- yose_campgrnds_utm %>% 
+  st_join(yose_veg_utm %>% 
+            select(ALLIANCE, DOMINANT, VEGETATION, CWHR),
+          join = st_intersects) %>% 
+  mutate(VEGETATION = as.character(VEGETATION))
+
+## View the columns in the campgrounds point layer
+names(yose_campgrnds_utm)
+
+## View the columns in the campgrounds point layer
+names(yose_campgrnds_veg)
+```
+
+Plot them
+
+```{r}
+## Plot it
+tm_shape(yose_bnd_utm) +
+  tm_polygons() +
+tm_shape(yose_campgrnds_veg) +
+  tm_symbols(col = "VEGETATION") +
+tm_layout(title = "Yosemite Campgrounds",
+          legend.outside = TRUE,
+          legend.outside.position = "right")
+```
+
+
+
+

@@ -119,7 +119,7 @@ How big is the buffered roads as a percentage of the total park area?
 
 ```
 
-Answer: see https://ucanr-igis.github.io/rspatial_scgis20/geoprocessing2.html
+Answer: 7.9%. See <https://ucanr-igis.github.io/rspatial_scgis20/geoprocessing2.html>
 
 # Example: Voronoi tesselation Yosemite's Campgrounds
 
