@@ -35,7 +35,7 @@ close(f)
 
 ## Load the script that has the ESRI Geocoding functions
 #source("./scripts/geocode_esri.R")
-source("./outputs/rspatial_scgis20/docs/scripts/geocode_esri.R")
+source("./outputs/rspatial_data/scripts/geocode_esri.R")
 
 ## Run the geocode_many() function
 ## Note this will consume some of your ArcGIS.com 'units'

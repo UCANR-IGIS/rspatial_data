@@ -2,3 +2,5 @@ ZMB*
 gadm36*
 *nb.html
 *.bak
+nb*_ans.*
+.gitignore
