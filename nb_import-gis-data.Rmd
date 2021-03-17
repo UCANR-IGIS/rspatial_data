@@ -1,0 +1,193 @@
+---
+title: "Import GIS Data"
+output:
+  html_notebook:
+    css: nb.css
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Import Layers for Yosemite National Park
+
+First list all the layers in the data folder:
+
+```{r}
+library(sf)
+
+## View spatial layers in the data folder
+st_layers("./data")
+```
+
+## Import a Shapefile
+
+Import the 'yose_boundary' layer (a Shapefile)
+
+```{r}
+yose_bnd_ll <- st_read(dsn="./data", layer="yose_boundary")
+```
+
+Note 1: we don't need to add the .shp extension
+
+Note 2: a convention is being used to name variable *yose_bnd_ll*.
+
+`yose` - all Yosemite layers start with this  
+`bnd` - tell me this the park boundary  
+`ll` - lat-long file  
+
+What type (class) of object is *yose_bnd_ll*?
+
+```{r}
+## View the class of the object we just created
+class(yose_bnd_ll)
+```
+View the properties of *yose_bnd_ll*:
+
+```{r}
+yose_bnd_ll
+```
+
+The `names()` function returns the column labels of a data frame (in this case the attribute table).
+
+```{r}
+## View column names in the attribute table
+names(yose_bnd_ll)
+```
+
+## Basic plotting sf objects
+
+To plot just the geometry of a sf object (i.e., no symbology from the attribute table), we can use the `st_geometry()` function.
+
+```{r}
+## Plot the geometry (outline) of the Yosemite boundary
+plot(yose_bnd_ll %>% st_geometry(), asp=1)
+```
+
+**Challenge**: what does the asp=1 do?
+
+## Import a KML
+
+kml & kmz files can have more than one layer. Hence the source is the kml file, and you must specify the layer by name.
+
+Import a kml containing the National Register of Historic Places in Yosemite in Yosemite. First find the KML file:
+
+```{r}
+## Import KML file
+kml_fn <- "./data/yose_historic_pts.kml"
+file.exists(kml_fn)
+```
+
+View the layers within this KML:
+
+```{r}
+## View the layers in this kml
+st_layers(kml_fn)
+```
+
+Import:
+
+```{r}
+## Import the 'yosem_historic_places' layer 
+yose_hp <- st_read(kml_fn, layer="yose_historic_places")
+```
+
+View properties
+
+```{r}
+## View properties
+yose_hp
+```
+
+## Import a GeoJSON file
+
+GeoJSON is a good alternative to the Shapefile and KML formats. GeoJSON typically stores one vector layer in one file, encoded in an open format that can be read in a text editor.
+
+Import the California county boundaries, which is saved as a GeoJSON file.
+
+```{r}
+## Import a Geojson file
+counties_fn <- "./data/ca_counties.geojson"
+file.exists(counties_fn)
+```
+
+View the layers:
+
+```{r}
+## View the layers 
+st_layers(counties_fn)
+```
+
+Import the 'county boundary' layer 
+
+```{r}
+## Import the 'ca_counties' layer 
+ca_counties_ll <- st_read(counties_fn)
+```
+
+Challenge: Plot the county boundaries:
+
+```{r}
+
+```
+
+## Import from a Geodatabase
+
+You can import (but not write to) an ESRI file geodatabase using the sf package. In this case, the source is the folder containing the geodatabase.
+
+Import the Yosemite’s trails from a geodatabase. First find the gdb file:
+
+```{r}
+## Define the path to the file geodatabase (a folder)
+gdb_fn <- "./data/yose_trails.gdb"
+file.exists(gdb_fn)
+```
+
+View the layers in this source:
+
+```{r}
+st_layers(gdb_fn)
+```
+
+Import the 'Trails' layer
+
+```{r}
+## Import the 'Trails' layer  (case sensitive!)
+yose_trails <- st_read(gdb_fn, layer="Trails")
+```
+
+Plot Yosemite’s Trails:
+
+```{r}
+## Plot the trails layer
+plot(st_geometry(yose_trails), axes=TRUE)
+```
+
+## Import from a GeoPackage
+
+GeoPackage is a relatively new open format for geospatial data. Let’s import Yosemite’s watersheds from a geopackage.
+
+```{r}
+## Import watersheds from a geopackage
+gpkg_watershd_fn <- "./data/yose_watersheds.gpkg"
+file.exists(gpkg_watershd_fn)
+st_layers(gpkg_watershd_fn)
+yose_watersheds <- st_read(gpkg_watershd_fn, layer="calw221")
+```
+
+Plot the watersheds:
+
+```{r}
+plot(st_geometry(yose_watersheds), axes=TRUE)
+```
+
+**Challenge**: What CRS are the Yosemite watersheds in?
+
+```{r}
+
+```
+
+**Challenge**: Look at the other GIS files in the data folder. Select one, import it, and plot it.
+
+```{r}
+
+```
+
