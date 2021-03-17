@@ -1,0 +1,92 @@
+---
+title: "Files and Folders"
+output:
+  html_notebook:
+    css: nb.css
+editor_options: 
+  chunk_output_type: inline
+---
+
+# About this R Notebook
+
+R Notebooks are a 'flavor' of R markdown that combine plain text with R commands in code chunks. You can (and should!) edit them, and save it every few minutes like anything else!
+
+Minimize the console. You won't need it because the output will appear 
+
+To view a copy of your notebook as HTML, just hit Save, then Preview.
+
+Keyboard shortcuts:
+
+ - run the current line of R: *ctrl + enter*
+ - run everything in the current code chunk: *ctrl + shift + enter*
+ - insert a new code chunk: *ctrl + alt + i*
+
+# Seeing what files exist
+
+View the working directory
+
+```{r}
+getwd()
+```
+List the files in the current working directory. Note '.' is shorthand for the current working directory.
+
+```{r}
+list.files(".")
+```
+
+**Challenge**. List all the files in your 'Home' directory.
+
+```{r}
+
+```
+
+List the Shapefiles in the 'data' directory.
+
+```{r}
+list.files("./data", pattern = "*.shp")
+```
+Write an expression that will check if a file named "sf_libraries.csv" exists in the data directory.
+
+```{r}
+file.exists("./data/sf_libraries.csv")
+```
+
+Import the *sf_libraries.csv* file. 
+
+```{r}
+my_data <- read.csv("./data/sf_libraries.csv")
+
+# View(my_data)
+```
+
+**Challenge**: What type of R object does `read.csv()` return?
+
+```{r}
+
+```
+
+Create 1000 random values using the random number function of your choice (e.g., rnorm).
+
+```{r}
+rnd_vals <- rnorm(1000) * 20
+```
+
+**Challenge**: Create a histogram of the values.
+
+```{r}
+
+```
+
+Save your random numbers to your 'Home' directory.
+
+```{r}
+save(rnd_vals, file="~/my_random_numbers.RData")
+```
+
+# End
+
+Congratulations on finishing the Notebook! Save it (again).
+
+Click on the 'Preview' button in the RStudio toolbar to save a copy of your work as HTML.
+
+
