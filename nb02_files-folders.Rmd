@@ -1,10 +1,6 @@
 ---
 title: "Files and Folders"
-output:
-  html_notebook:
-    css: nb.css
-editor_options: 
-  chunk_output_type: inline
+output: html_notebook
 ---
 
 # About this R Notebook
@@ -34,7 +30,7 @@ List the files in the current working directory. Note '.' is shorthand for the c
 list.files(".")
 ```
 
-**Challenge**. List all the files in your 'Home' directory.
+**Challenge**. List all the files in your 'Home' directory. [Answer](http://bit.ly/38UPrbQ) 
 
 ```{r}
 
