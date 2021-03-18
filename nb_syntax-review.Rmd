@@ -1,10 +1,6 @@
 ---
-title: "R Review"
-output:
-  html_notebook:
-    css: nb.css
-editor_options: 
-  chunk_output_type: inline
+title: "R Syntax Review"
+output: html_notebook
 ---
 
 # About this R Notebook
@@ -47,11 +43,14 @@ Create two numeric variables and add them together. [Answer](http://bit.ly/3twiX
 
 ```
 
-What happens if you add a number variable to a character variable? [Answer]()
+What happens if you add a number variable to a character variable? [Answer](http://bit.ly/3eOgadJ)
 
 ```{r}
 
 ```
+
+NOTE: YOU WON'T BE ABLE TO SAVE A R NOTEBOOK THAT HAS CODE CHUNKS THAT PRODUCE ERRORS.
+COMMENT OUT ANY LINES OF CODE THAT GENERATE ERRORS BEFORE PROCEEDING.
 
 # Syntax Rules
 
