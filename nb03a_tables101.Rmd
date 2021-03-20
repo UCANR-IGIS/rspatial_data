@@ -1,0 +1,125 @@
+---
+title: "Data Frames 101"
+output: html_notebook
+---
+
+# Sample Data Frames
+
+R comes with several sample data frames, for example `mtcars`.
+
+```{r}
+mtcars
+```
+
+Wondering where the `mtcars` data came from? Just like functions, sample datasets usually have their help pages. Run `?mtcars` to see where this one came from.
+
+## Viewing the Properties of a Data Frame
+
+You can view the number of **rows** and **columns** of a dataframe with `nrow()` and `ncol()`:
+
+```{r}
+nrow(mtcars)
+ncol(mtcars)
+```
+You can view the **names** of the columns in a data frame with names():
+
+```{r}
+names(mtcars)
+```
+
+The tibble package has a nice function called `glimpse()` that will show you the names, column types, and first few values for each column in a concise format:
+
+```{r}
+tibble::glimpse(mtcars)
+```
+
+## Grabbing Columns
+
+You can grab a single column using the `$` operator. 
+
+Extract the values in the mpg column:
+
+```{r}
+mtcars$mpg
+```
+**CHALLENGE**: Compute the average mpg of vehicles in mtcars. [Answer](http://bit.ly/310o8bW)
+
+```{r}
+
+```
+
+**CHALLENGE**: Answer the following questions about the `quakes` data frame, which has data about some earthquakes: [Answer](http://bit.ly/3eUoyIV)
+
+1) How many rows and columns does it contain?  
+2) What is the average magnitude of the earthquakes recorded in this data frame?  
+3) What is the minimum and maximum latitude and longitude of the earthquakes in this dataset? (hint: look at the `range()` function)  
+4) In which year was the earliest earthquake recorded?  
+
+```{r}
+
+```
+
+## Filtering rows and columns
+
+You can filter (subset) rows and columns using square bracket notation. Example:
+
+`my_df[rows-expression, cols-expression]`
+
+To view the first 5 rows of `quakes`, we pass a vector of the integers:
+
+```{r}
+quakes[1:5, ]
+```
+
+NOTE: You can omit the rows-expression or cols-expression, but you still need a comma instead the square brackets.
+
+View every 5th row in quakes:
+
+```{r}
+quakes[ c(5, 10, 15, 20, 25), ]
+```
+
+To return rows that meet a certain condition, *rows* can be an expression that returns TRUE/FALSE values:
+
+```{r}
+## Quakes whose magnitude was >= 5.9
+quakes[ quakes$mag >= 5.9,  ]
+```
+
+**CHALLENGE**: How many earthquakes were detected by 100 or more stations? [Answer])(http://bit.ly/3s51wTq)
+
+```{r}
+
+```
+
+**CHALLENGE**: What was the largest earthquake on record? [Answer](http://bit.ly/391H7Hs)
+
+```{r}
+
+```
+
+You can also use the rows expression to sort the rows. The order() function returns the indices of elements in a vector sorted. 
+
+
+```{r}
+mag_order_idx <- order(quakes$mag)
+mag_order_idx
+quakes[mag_order_idx, ]
+```
+
+
+The *cols-expression* can be vector of integers (corresponding to column numbers you want returned), or a character vector containing column names. You can also use the cols-expression to reorder the columns.
+
+Write an expression that will return the longitude and latitude columns only (in that order) for the biggest 10 earthquakes (by magnitude).
+
+```{r}
+mag_topten_idx <- order(quakes$mag, decreasing = TRUE)[1:10]
+quakes[mag_topten_idx, ]
+```
+
+**CHALLENGE**: Using the mtcars data frame, compute the average mpg for 4, 6, and 8 cylinder vehicles. [Answer](http://bit.ly/3s6meSL)
+
+```{r}
+
+```
+

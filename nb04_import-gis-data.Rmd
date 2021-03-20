@@ -205,7 +205,7 @@ plot(st_geometry(yose_trails), axes=TRUE)
 
 **CHALLENGE**: The following code does **not** work to make a plot of the park boundary and the trails. Can you tell why? [Answer](http://bit.ly/3eSGOlZ)
 
-```{r plot_ynp_all_klippy, echo=TRUE, class.source="klippy copyme", eval=FALSE}
+```{r}
 plot(yose_bnd_ll %>% st_geometry())
 plot(yose_trails %>% st_geometry(), add=TRUE)
 ```
