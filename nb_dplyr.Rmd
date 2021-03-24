@@ -1,0 +1,156 @@
+---
+title: "Wrangling 2D Data with dplyr"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+`dplyr` is a package for manipulating data frames, including subsetting rows and columns, sorting rows, adding new columns, grouping rows, joins, etc.
+
+In this notebook we'll practice using the `dplyr` package.
+
+## Set preferences with `conflicted`
+
+Several `dplyr` functions have very generic names. To avoid potential conflicts with functions from  other packages, we'll start by stating our preferences using the conflicted package:
+
+```{r}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+Remember the iris data frame? How many rows does iris have? 
+
+```{r}
+nrow(iris)
+```
+
+## Filter rows with `filter()`
+
+Write an expression that returns just those rows where Sepal.Length > 7:
+
+```{r}
+# Select rows where Sepal.Length > 7
+iris %>% filter(Sepal.Length > 7)
+```
+
+Add another criteria specifying the species has to be `virginica`:
+
+HINT: remember to use '==' to test for equality
+
+```{r}
+iris %>% filter(Sepal.Length > 7, Species=="virginica")
+```
+
+**CHALLENGE**: Write an expression that will return rows where the Petal.Length is between 4.1 and 4.4. [Answer](https://bit.ly/3tNPVIH)
+
+```{r}
+
+```
+
+## Filter rows with `slice()`
+
+Sometimes you want to fliter rows by row number, rather than an attribute column. You can do that with `slice()`.
+
+Show the first 10 rows from iris:
+
+```{r}
+iris %>% slice(1:10)
+```
+
+## Filter columns with `select()`
+
+To get a subset of columns, or if you want the columns in a different order, include the `select()` function in your expression.
+
+For example if you only want the `Sepal.Length` and `Sepal.Width` columns, you could run:
+
+```{r}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species)
+```
+
+## Sort rows with `arrange()`
+
+Add `arrange()` to your expression to sort rows. For example to sort the last expression by `Sepal.Width` we simply add one more piece to the expression:
+
+```{r}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species) %>% 
+  arrange(Sepal.Width)
+```
+
+## Create a new column with mutate()
+
+Create a new colum which contains the product of the sepal length and petal length. 
+
+```{r}
+iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
+```
+
+**CHALLENGE**: Write an expression from the `quakes` data frame that:
+
+- returns the lat, long, and mag columns  
+- only return quakes that are i) north of 20 degrees South, and ii) larger than magnitude 5.0. 
+- sorts the rows by magnitude
+
+Hint: Fiji is south of the equator. [Answer](https://bit.ly/3fdflLR)
+
+```{r}
+
+```
+
+## Group and Summarize Rows
+
+You can 'group' rows using `group_by()`. By itself, grouping rows doesn't do much. Usually you follow `group_by()` with summarise() which creates some kind of summary for each group.
+
+Example: for each Species in iris, compute the mean petal length and width
+
+```{r}
+iris %>% group_by(Species) %>% 
+  summarise(avg_petal_length = mean(Petal.Length), avg_petal_width = mean(Petal.Width))
+```
+
+**CHALLENGE**: For each species in iris, compute the minimum and maximum sepal length.
+
+```{r}
+
+```
+
+## Join Tables Based on a Common Column
+
+Practice by creating a data frame with additional info about the three iris species:
+
+```{r}
+iris_colors <- data.frame(Species=c("setosa", "versicolor", "virginica"),
+                          num_genes = c(42000, 41000, 43000),
+                          max_water = c(1.2, 1.4, 1.7))
+iris_colors
+```
+
+
+```{r}
+iris %>% left_join(iris_colors)
+```
+
+
+
+
+  
+
+## End
+
+Congratulations, you have completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar. If
+
+
