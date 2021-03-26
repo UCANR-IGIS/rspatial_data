@@ -14,7 +14,7 @@ In this notebook we'll practice using the `dplyr` package.
 
 Several `dplyr` functions have very generic names. To avoid potential conflicts with functions from  other packages, we'll start by stating our preferences using the conflicted package:
 
-```{r}
+```{r chunk01}
 library(dplyr)
 
 ## Load the conflicted package
@@ -29,7 +29,7 @@ conflict_prefer("arrange", "dplyr", quiet = TRUE)
 
 Remember the iris data frame? How many rows does iris have? 
 
-```{r}
+```{r chunk02}
 nrow(iris)
 ```
 
@@ -37,7 +37,7 @@ nrow(iris)
 
 Write an expression that returns just those rows where Sepal.Length > 7:
 
-```{r}
+```{r chunk03}
 # Select rows where Sepal.Length > 7
 iris %>% filter(Sepal.Length > 7)
 ```
@@ -46,13 +46,13 @@ Add another criteria specifying the species has to be `virginica`:
 
 HINT: remember to use '==' to test for equality
 
-```{r}
+```{r chunk04}
 iris %>% filter(Sepal.Length > 7, Species=="virginica")
 ```
 
 **CHALLENGE**: Write an expression that will return rows where the Petal.Length is between 4.1 and 4.4. [Answer](https://bit.ly/3tNPVIH)
 
-```{r}
+```{r chunk05}
 
 ```
 
@@ -62,7 +62,7 @@ Sometimes you want to fliter rows by row number, rather than an attribute column
 
 Show the first 10 rows from iris:
 
-```{r}
+```{r chunk06}
 iris %>% slice(1:10)
 ```
 
@@ -72,7 +72,7 @@ To get a subset of columns, or if you want the columns in a different order, inc
 
 For example if you only want the `Sepal.Length` and `Sepal.Width` columns, you could run:
 
-```{r}
+```{r chunk07}
 iris %>% 
   filter(Sepal.Length > 7) %>% 
   select(Sepal.Length, Sepal.Width, Species)
@@ -82,18 +82,35 @@ iris %>%
 
 Add `arrange()` to your expression to sort rows. For example to sort the last expression by `Sepal.Width` we simply add one more piece to the expression:
 
-```{r}
+```{r chunk08a}
 iris %>% 
   filter(Sepal.Length > 7) %>% 
   select(Sepal.Length, Sepal.Width, Species) %>% 
   arrange(Sepal.Width)
 ```
 
-## Create a new column with mutate()
+To sort rows in descending order, wrap the field name in `desc()`:
 
-Create a new colum which contains the product of the sepal length and petal length. 
+```{r chunk08b}
+iris %>% 
+  filter(Sepal.Length > 7) %>% 
+  select(Sepal.Length, Sepal.Width, Species) %>% 
+  arrange(desc(Sepal.Width))
+```
 
-```{r}
+**CHALLENGE**: Write an expression that returns the top-5 Petal Lengths (all species)
+
+Hint: there are a couple of ways to do this. Look at the dplyr [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) for inspiration. [Answer](https://bit.ly/3d9rVsS)
+
+```{r chunk08c}
+
+```
+
+## Create a new column with `mutate()`
+
+Create a new column which contains the product of the Sepal Length and Petal Length. 
+
+```{r chunk09}
 iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
 ```
 
@@ -105,7 +122,7 @@ iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
 
 Hint: Fiji is south of the equator. [Answer](https://bit.ly/3fdflLR)
 
-```{r}
+```{r chunk10}
 
 ```
 
@@ -115,14 +132,14 @@ You can 'group' rows using `group_by()`. By itself, grouping rows doesn't do muc
 
 Example: for each Species in iris, compute the mean petal length and width
 
-```{r}
+```{r chunk11}
 iris %>% group_by(Species) %>% 
   summarise(avg_petal_length = mean(Petal.Length), avg_petal_width = mean(Petal.Width))
 ```
 
 **CHALLENGE**: For each species in iris, compute the minimum and maximum sepal length.
 
-```{r}
+```{r chunk12}
 
 ```
 
@@ -130,22 +147,20 @@ iris %>% group_by(Species) %>%
 
 Practice by creating a data frame with additional info about the three iris species:
 
-```{r}
+```{r chunk13}
 iris_colors <- data.frame(Species=c("setosa", "versicolor", "virginica"),
                           num_genes = c(42000, 41000, 43000),
                           max_water = c(1.2, 1.4, 1.7))
 iris_colors
 ```
 
+Now join this table to `iris` using `left_join()`. The `by` argument is the name of the column the data frames have in common.
 
-```{r}
-iris %>% left_join(iris_colors)
+```{r chunk14}
+iris %>% left_join(iris_colors, by = "Species")
 ```
 
-
-
-
-  
+NOTE: if the common column was named differently in the two tables, you can pass a named vector as the by argument. For example if the capitalization was different you could let `by = c("Species" = "species")`.
 
 ## End
 
