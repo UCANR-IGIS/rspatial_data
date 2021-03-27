@@ -1,0 +1,177 @@
+---
+title: "Create a Leaflet Map from Google Sheets Data"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook, we'll make a leaflet map using data from Google Sheets.
+
+## Import San Francisco Public Library Locations from Google Sheets
+
+Start by importing the *sf_libraries* sheet from the following Google Spreadsheet (which can be viewed by anyone with the link):
+
+<https://docs.google.com/spreadsheets/d/1Zm3BkQaW4vuk-X4L_6BOhFEyCr3HO_kSMktd-rHyXG8/>.
+
+\
+
+To import, we're going to need the Google Sheet ID (which you can read from the URL):
+
+```{r chunk01}
+gsheet_id <- "1Zm3BkQaW4vuk-X4L_6BOhFEyCr3HO_kSMktd-rHyXG8"
+```
+
+\
+
+Load the `googlesheets4` package:
+
+```{r chunk02}
+library(googlesheets4)
+```
+
+\
+
+Our Google Sheet is open to anyone with the link, so we don't need to be 'signed-in'. To avoid a password prompt, let's 'sign-out' with `gs4_deauth()`:
+
+```{r chunk03}
+gs4_deauth()
+```
+
+
+Import the *sf_libraries* sheet using `range_read()`:
+
+```{r chunk04}
+## Download Sheet1
+sf_libraries_tbl <- range_read(ss = gsheet_id, 
+                               sheet = "sf_libraries", 
+                               range = NULL)
+```
+
+\
+
+View what we got:
+
+```{r chunk05}
+tibble::glimpse(sf_libraries_tbl)
+```
+
+We can see there's a `lon` and `lat` column in there, so we don't have to geocode the addresses. 
+
+Let's create a version of this tibble containing only the columns we actually need in our interactive map:
+
+```{r chunk06}
+library(dplyr, quietly = TRUE)
+
+sf_lib4map_tbl <- sf_libraries_tbl %>% 
+  dplyr::select(branch, address, city, state, zip, phone, lon, lat)
+sf_lib4map_tbl
+```
+
+\
+
+## Create a sf data frame
+
+The next step is turn the data frame into a sf data frame.
+
+The coordinates are already in geographic coordinates (i.e., longitude & latitude), so we don't need to (un)project the points. However we do need to tell sf what the CRS is (4236 is the EPSG number for geographic coordinates with WGS 84 datum).
+
+```{r chunk07}
+library(sf, quietly = TRUE)
+sf_lib4map_sf <- st_as_sf(sf_lib4map_tbl, coords = c("lon", "lat"), crs = 4326)
+sf_lib4map_sf
+```
+
+\
+
+## Create an Interactive Map with `tmap`
+
+Load `tmap` and set the mode to 'view' (interactive):
+
+```{r chunk08a}
+library(tmap, quietly = TRUE)
+tmap_mode("view")
+```
+
+\
+
+The most basic tmap involves a `tm_shape()` (to define the data for a layer) plus a function to draw features (like `tm_symbols()`): 
+
+```{r chunk08b}
+tm_shape(sf_lib4map_sf) +
+  tm_symbols()
+```
+
+Let's change the basemap to *OpenStreetMap.* (Note: you can view all of the available basemaps by typing `providers$` in the code chunk or console.)
+
+```{r chunk09}
+tm_shape(sf_lib4map_sf) +
+  tm_symbols(col = "blue", size = 0.8) +
+tm_basemap(providers$OpenStreetMap)
+```
+
+\
+
+Lastly we'll modify the pop-up windows with the `popup.vars` argument:
+
+```{r chunk10}
+tm_shape(sf_lib4map_sf) +
+  tm_symbols(col = "blue", size = 0.8, popup.vars = c("address", "city", "state", "zip", "phone")) +
+tm_basemap(providers$OpenStreetMap)
+```
+
+\
+
+## Create an Interactive Map with `leaflet`
+
+The `leaflet` package can also be used to make interactive maps. `leaflet` provides a few more customization options, including the ability to customize the pop-up windows with our own HTML text. 
+
+First we create a character vector of HTML code we want to appear in the popup windows:
+
+```{r chunk11}
+## Create a character vector of HTML code for the pop-up windows
+my_popup_html <- sf_lib4map_sf %>%
+  st_drop_geometry() %>% 
+  transmute(popup_html = paste0("<b>", branch, "</b><br/>", 
+                                address, "<br/>", 
+                                city, ", ", state, " ", zip, "<br/>", 
+                                "tel: ", phone)) %>% 
+  pull(popup_html)
+
+head(my_popup_html)
+```
+
+\
+
+Now we're ready to create the map in leaflet:
+
+```{r chunk12}
+library(leaflet)
+
+## Create the leaflet map
+library_leaf <- leaflet(sf_lib4map_sf) %>% 
+  addTiles() %>% 
+  addCircleMarkers(popup = my_popup_html, radius = 5, stroke = FALSE, fillOpacity = 0.7)
+
+## Display the leaflet map
+library_leaf
+```
+
+Click on one of the circles to view the custom HTML code we created for the popup windows
+
+\
+
+## Challenge
+
+**CHALLENGE**: Create a similar interactive map of the CA Breweries (see the *ca_brew* sheet in the same Google Spreadsheet). [Answer](https://bit.ly/3fd3VYC)
+
+```{r chunk13}
+
+```
+
+## End
+
+Congratulations, you've completed another Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+

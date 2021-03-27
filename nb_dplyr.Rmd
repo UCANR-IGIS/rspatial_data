@@ -143,29 +143,9 @@ iris %>% group_by(Species) %>%
 
 ```
 
-## Join Tables Based on a Common Column
-
-Practice by creating a data frame with additional info about the three iris species:
-
-```{r chunk13}
-iris_colors <- data.frame(Species=c("setosa", "versicolor", "virginica"),
-                          num_genes = c(42000, 41000, 43000),
-                          max_water = c(1.2, 1.4, 1.7))
-iris_colors
-```
-
-Now join this table to `iris` using `left_join()`. The `by` argument is the name of the column the data frames have in common.
-
-```{r chunk14}
-iris %>% left_join(iris_colors, by = "Species")
-```
-
-NOTE: if the common column was named differently in the two tables, you can pass a named vector as the by argument. For example if the capitalization was different you could let `by = c("Species" = "species")`.
-
 ## End
 
 Congratulations, you have completed the Notebook! 
 
-To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar. If
-
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
 
