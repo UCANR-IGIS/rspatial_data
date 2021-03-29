@@ -2925,6 +2925,23 @@ div.tocify {
 <p>First let’s look at layers in the data folder, by passing the directory to <code>st_layers()</code> from the <code>sf</code> package. This will show us the Shapefiles but not layers that are in ‘containers’, like file geodatabases, geojson files, etc.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzZilcblxuIyMgVmlldyBzcGF0aWFsIGxheWVycyBpbiB0aGUgZGF0YSBmb2xkZXIuXG5zdF9sYXllcnMoXCIuL2RhdGFcIilcbmBgYCJ9 -->
+<pre class="r"><code>library(sf)
+
+## View spatial layers in the data folder.
+st_layers(&quot;./data&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRHJpdmVyOiBFU1JJIFNoYXBlZmlsZSBcbkF2YWlsYWJsZSBsYXllcnM6XG4ifQ== -->
+<pre><code>Driver: ESRI Shapefile 
+Available layers:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJtMVNTMDdETUJCMTA3aWZTQ2xJdlFQTGlMWkNTQ3lncUt4UnhhcTd5RTJjTk1LMUk5c0ZJalpjaGtOd2l4NkZFeFRzWkF3MHd0Sms1cjJaOFh5Y2g3dlZMRmdGQ0tFdThvMTBzVEZSYjdHY1RDK21DUG1lUVIzakdWcjlZcUxHeHZDTm5CckI0QWhVRnF0a0l3UlR3T0FubXM4dUFZU1ZVRFJlaXgxUGlheUFITlJrS1FyQUozVkdUQmdyQ0Urb2FwWEFTMUZ3RGFDL0ZLektCZjhmSG9WNjk3Zm1PN0wwL0hWdlowUHpqN0xXTjUrb3dlL3pSaS9lRUp3bVBnTC9GZWd6ME5lZ0J5NzhhRXVZaysxUCs3N2JFQ01WbGJGMXVhWGtWR3lwbGxXc3E5S1JnNHdTdlpQVXJiR1hGWlNscWxWaEtNVno1S3FFZGtob0hMZGJTUmhScmhWSEJpblJKTXFrYlFXaFF5dWxMMHBkQ0c2U3ZIRno0MUZ5UjdhSWZyTFo4Y2Z6aWIyNHBwc1RnbzMvMkg1VHl2dHFQVzJQOHJ6Z2JnV1lrVFZsQUVabTBuclFxSlMvYnhvWVZrVmFhT0xpZ3NUOGVzRFVNNkhETjV2RGhvN1pBZ0FBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["layer_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["geometry_type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["features"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["fields"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"sf_schools","2":"Point","3":"445","4":"15"},{"1":"veg37","2":"Polygon","3":"6512","4":"26"},{"1":"yose_boundary","2":"Polygon","3":"1","4":"11"},{"1":"yose_poi","2":"Point","3":"2720","4":"30"},{"1":"veg37_alliances","2":"__NA__","3":"39","4":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -2940,6 +2957,21 @@ div.tocify {
 <p>Import the ‘yose_boundary’ layer (a Shapefile)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueW9zZV9ibmRfbGwgPC0gc3RfcmVhZChkc249XCIuL2RhdGFcIiwgbGF5ZXI9XCJ5b3NlX2JvdW5kYXJ5XCIpXG5gYGAifQ== -->
+<pre class="r"><code>yose_bnd_ll &lt;- st_read(dsn=&quot;./data&quot;, layer=&quot;yose_boundary&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVhZGluZyBsYXllciBgeW9zZV9ib3VuZGFyeScgZnJvbSBkYXRhIHNvdXJjZSBgRDpcXFdvcmtzaG9wc1xcUi1TcGF0aWFsXFxyc3BhdGlhbF9tb2RcXG91dHB1dHNcXHJzcGF0aWFsX2RhdGFcXGRhdGEnIHVzaW5nIGRyaXZlciBgRVNSSSBTaGFwZWZpbGUnXG5TaW1wbGUgZmVhdHVyZSBjb2xsZWN0aW9uIHdpdGggMSBmZWF0dXJlIGFuZCAxMSBmaWVsZHNcbmdlb21ldHJ5IHR5cGU6ICBQT0xZR09OXG5kaW1lbnNpb246ICAgICAgWFlcbmJib3g6ICAgICAgICAgICB4bWluOiAtMTE5Ljg4NjQgeW1pbjogMzcuNDk0NyB4bWF4OiAtMTE5LjE5NjQgeW1heDogMzguMTg1MTVcbmdlb2dyYXBoaWMgQ1JTOiBOb3J0aF9BbWVyaWNhbl9EYXR1bV8xOTgzXG4ifQ== -->
+<pre><code>Reading layer `yose_boundary&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data&#39; using driver `ESRI Shapefile&#39;
+Simple feature collection with 1 feature and 11 fields
+geometry type:  POLYGON
+dimension:      XY
+bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+geographic CRS: North_American_Datum_1983</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUaGlzIGFsc28gd29ya3M6XG4jIHlvc2VfYm5kX2xsIDwtIHN0X3JlYWQoZHNuPVwiLi9kYXRhL3lvc2VfYm91bmRhcnkuc2hwXCIpXG5gYGAifQ== -->
+<pre class="r"><code># This also works:
+# yose_bnd_ll &lt;- st_read(dsn=&quot;./data/yose_boundary.shp&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Note 1: we don’t need to add the .shp extension</p>
@@ -2958,6 +2990,22 @@ div.tocify {
 <p>View the properties of <em>yose_bnd_ll</em> by simply running it by itself:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueW9zZV9ibmRfbGxcbmBgYCJ9 -->
+<pre class="r"><code>yose_bnd_ll</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU2ltcGxlIGZlYXR1cmUgY29sbGVjdGlvbiB3aXRoIDEgZmVhdHVyZSBhbmQgMTEgZmllbGRzXG5nZW9tZXRyeSB0eXBlOiAgUE9MWUdPTlxuZGltZW5zaW9uOiAgICAgIFhZXG5iYm94OiAgICAgICAgICAgeG1pbjogLTExOS44ODY0IHltaW46IDM3LjQ5NDcgeG1heDogLTExOS4xOTY0IHltYXg6IDM4LjE4NTE1XG5nZW9ncmFwaGljIENSUzogTm9ydGhfQW1lcmljYW5fRGF0dW1fMTk4M1xuICBVTklUX0NPREUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBHSVNfTk9URVNcbjEgICAgICBZT1NFIExhbmRzIC0gaHR0cDovL2xhbmRzbmV0Lm5wcy5nb3YvdHJhY3RzbmV0L2RvY3VtZW50cy9ZT1NFL01FVEFEQVRBL3lvc2VfbWV0YWRhdGEueG1sXG4gICAgICAgICAgICAgICBVTklUX05BTUUgIERBVEVfRURJVCBTVEFURSBSRUdJT04gR05JU19JRCAgICAgVU5JVF9UWVBFIENSRUFURURfQllcbjEgWW9zZW1pdGUgTmF0aW9uYWwgUGFyayAyMDE2LTAxLTI3ICAgIENBICAgICBQVyAgMjU1OTIzIE5hdGlvbmFsIFBhcmsgICAgICBMYW5kc1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTUVUQURBVEEgUEFSS05BTUUgICAgICAgICAgICAgICAgICAgICAgIGdlb21ldHJ5XG4xIGh0dHA6Ly9ucmRhdGEubnBzLmdvdi9wcm9ncmFtcy9MYW5kcy9ZT1NFX01FVEFEQVRBLnhtbCBZb3NlbWl0ZSBQT0xZR09OICgoLTExOS44NDU2IDM3LjgzMjcuLi5cbiJ9 -->
+<pre><code>Simple feature collection with 1 feature and 11 fields
+geometry type:  POLYGON
+dimension:      XY
+bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+geographic CRS: North_American_Datum_1983
+  UNIT_CODE                                                                           GIS_NOTES
+1      YOSE Lands - http://landsnet.nps.gov/tractsnet/documents/YOSE/METADATA/yose_metadata.xml
+               UNIT_NAME  DATE_EDIT STATE REGION GNIS_ID     UNIT_TYPE CREATED_BY
+1 Yosemite National Park 2016-01-27    CA     PW  255923 National Park      Lands
+                                                METADATA PARKNAME                       geometry
+1 http://nrdata.nps.gov/programs/Lands/YOSE_METADATA.xml Yosemite POLYGON ((-119.8456 37.8327...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -2969,12 +3017,36 @@ div.tocify {
 <p>The <code>names()</code> function returns the column labels of a data frame (in this case the attribute table).</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgVmlldyBjb2x1bW4gbmFtZXMgaW4gdGhlIGF0dHJpYnV0ZSB0YWJsZVxubmFtZXMoeW9zZV9ibmRfbGwpXG5gYGAifQ== -->
+<pre class="r"><code>## View column names in the attribute table
+names(yose_bnd_ll)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcIlVOSVRfQ09ERVwiICBcIkdJU19OT1RFU1wiICBcIlVOSVRfTkFNRVwiICBcIkRBVEVfRURJVFwiICBcIlNUQVRFXCIgICAgICBcIlJFR0lPTlwiICAgICBcIkdOSVNfSURcIiAgIFxuIFs4XSBcIlVOSVRfVFlQRVwiICBcIkNSRUFURURfQllcIiBcIk1FVEFEQVRBXCIgICBcIlBBUktOQU1FXCIgICBcImdlb21ldHJ5XCIgIFxuIn0= -->
+<pre><code> [1] &quot;UNIT_CODE&quot;  &quot;GIS_NOTES&quot;  &quot;UNIT_NAME&quot;  &quot;DATE_EDIT&quot;  &quot;STATE&quot;      &quot;REGION&quot;     &quot;GNIS_ID&quot;   
+ [8] &quot;UNIT_TYPE&quot;  &quot;CREATED_BY&quot; &quot;METADATA&quot;   &quot;PARKNAME&quot;   &quot;geometry&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Take note of the last column - <code>geometry</code>. That’s where the geometry is saved (we’ll come back to that later).</p>
 <p>View the first few rows of the attribute table with <code>head()</code>:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZCh5b3NlX2JuZF9sbClcbmBgYCJ9 -->
+<pre class="r"><code>head(yose_bnd_ll)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU2ltcGxlIGZlYXR1cmUgY29sbGVjdGlvbiB3aXRoIDEgZmVhdHVyZSBhbmQgMTEgZmllbGRzXG5nZW9tZXRyeSB0eXBlOiAgUE9MWUdPTlxuZGltZW5zaW9uOiAgICAgIFhZXG5iYm94OiAgICAgICAgICAgeG1pbjogLTExOS44ODY0IHltaW46IDM3LjQ5NDcgeG1heDogLTExOS4xOTY0IHltYXg6IDM4LjE4NTE1XG5nZW9ncmFwaGljIENSUzogTm9ydGhfQW1lcmljYW5fRGF0dW1fMTk4M1xuICBVTklUX0NPREUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBHSVNfTk9URVNcbjEgICAgICBZT1NFIExhbmRzIC0gaHR0cDovL2xhbmRzbmV0Lm5wcy5nb3YvdHJhY3RzbmV0L2RvY3VtZW50cy9ZT1NFL01FVEFEQVRBL3lvc2VfbWV0YWRhdGEueG1sXG4gICAgICAgICAgICAgICBVTklUX05BTUUgIERBVEVfRURJVCBTVEFURSBSRUdJT04gR05JU19JRCAgICAgVU5JVF9UWVBFIENSRUFURURfQllcbjEgWW9zZW1pdGUgTmF0aW9uYWwgUGFyayAyMDE2LTAxLTI3ICAgIENBICAgICBQVyAgMjU1OTIzIE5hdGlvbmFsIFBhcmsgICAgICBMYW5kc1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTUVUQURBVEEgUEFSS05BTUUgICAgICAgICAgICAgICAgICAgICAgIGdlb21ldHJ5XG4xIGh0dHA6Ly9ucmRhdGEubnBzLmdvdi9wcm9ncmFtcy9MYW5kcy9ZT1NFX01FVEFEQVRBLnhtbCBZb3NlbWl0ZSBQT0xZR09OICgoLTExOS44NDU2IDM3LjgzMjcuLi5cbiJ9 -->
+<pre><code>Simple feature collection with 1 feature and 11 fields
+geometry type:  POLYGON
+dimension:      XY
+bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+geographic CRS: North_American_Datum_1983
+  UNIT_CODE                                                                           GIS_NOTES
+1      YOSE Lands - http://landsnet.nps.gov/tractsnet/documents/YOSE/METADATA/yose_metadata.xml
+               UNIT_NAME  DATE_EDIT STATE REGION GNIS_ID     UNIT_TYPE CREATED_BY
+1 Yosemite National Park 2016-01-27    CA     PW  255923 National Park      Lands
+                                                METADATA PARKNAME                       geometry
+1 http://nrdata.nps.gov/programs/Lands/YOSE_METADATA.xml Yosemite POLYGON ((-119.8456 37.8327...</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -2983,6 +3055,13 @@ div.tocify {
 <p>To plot just the geometry of a sf object (i.e., no symbology from the attribute table), we can use the <code>st_geometry()</code> function.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgUGxvdCB0aGUgZ2VvbWV0cnkgKG91dGxpbmUpIG9mIHRoZSBZb3NlbWl0ZSBib3VuZGFyeVxucGxvdCh5b3NlX2JuZF9sbCAlPiUgc3RfZ2VvbWV0cnkoKSwgYXNwPTEpXG5gYGAifQ== -->
+<pre class="r"><code>## Plot the geometry (outline) of the Yosemite boundary
+plot(yose_bnd_ll %&gt;% st_geometry(), asp=1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -3006,21 +3085,79 @@ div.tocify {
 <p>Import a kml containing the National Register of Historic Places in Yosemite in Yosemite. First find the KML file:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IEtNTCBmaWxlXG5rbWxfZm4gPC0gXCIuL2RhdGEveW9zZV9oaXN0b3JpY19wdHMua21sXCJcbmZpbGUuZXhpc3RzKGttbF9mbilcbmBgYCJ9 -->
+<pre class="r"><code>## Import KML file
+kml_fn &lt;- &quot;./data/yose_historic_pts.kml&quot;
+file.exists(kml_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>View the layers within this KML:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgVmlldyB0aGUgbGF5ZXJzIGluIHRoaXMga21sXG5zdF9sYXllcnMoa21sX2ZuKVxuYGBgIn0= -->
+<pre class="r"><code>## View the layers in this kml
+st_layers(kml_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRHJpdmVyOiBLTUwgXG5BdmFpbGFibGUgbGF5ZXJzOlxuIn0= -->
+<pre><code>Driver: KML 
+Available layers:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJYVy9DSUJTOVZ0RFpSTE5rL280bTFmaStaZnNCWmsrK05heFNKVU5vQUxQMWJiL2M3ZEtDV1NHNTRaNXpQdys4dngyMitTRUhnQ2tRdENsRkYyYXYrM0t6MndDUURORUVJd3QvZjJQV0V6b0U3ZkZmWU4xcHk2dXpzRTRiVVZldFpEVzNTUTdkYTZFY09pdFBQci84UURnRGptZzhrU3AydVhjaWdjd2w2N2lwZkNnd3l4UFhGKzVNVjdtdWplUkR3NW03R2l3ZjhLd1JYQjV0TW1GaDlGY1JweXo3UUcvak5XckpiQ29vUHpMSGlzYjROUUJ1U2NsY3QwNW9oVVdaZnpHYUZFOU1Rc3pyODFWOWxxVnZITGFBOFVaM253eWpzdC9RZ2thQlhKMkVpdktwWkI5Y0JyQkNsYjNJb2pYK0Y0SUNaRzNodEdNeEw2KzFqRXl2Q1c1LzhDN3dEQ0VDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["layer_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["geometry_type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["features"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["fields"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"yose_historic_places","2":"Point","3":"35","4":"2"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Import:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IHRoZSAneW9zZW1faGlzdG9yaWNfcGxhY2VzJyBsYXllciBcbnlvc2VfaHBfbGwgPC0gc3RfcmVhZChrbWxfZm4sIGxheWVyPVwieW9zZV9oaXN0b3JpY19wbGFjZXNcIilcbmBgYCJ9 -->
+<pre class="r"><code>## Import the &#39;yosem_historic_places&#39; layer 
+yose_hp_ll &lt;- st_read(kml_fn, layer=&quot;yose_historic_places&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVhZGluZyBsYXllciBgeW9zZV9oaXN0b3JpY19wbGFjZXMnIGZyb20gZGF0YSBzb3VyY2UgYEQ6XFxXb3Jrc2hvcHNcXFItU3BhdGlhbFxccnNwYXRpYWxfbW9kXFxvdXRwdXRzXFxyc3BhdGlhbF9kYXRhXFxkYXRhXFx5b3NlX2hpc3RvcmljX3B0cy5rbWwnIHVzaW5nIGRyaXZlciBgS01MJ1xuU2ltcGxlIGZlYXR1cmUgY29sbGVjdGlvbiB3aXRoIDM1IGZlYXR1cmVzIGFuZCAyIGZpZWxkc1xuZ2VvbWV0cnkgdHlwZTogIFBPSU5UXG5kaW1lbnNpb246ICAgICAgWFlcbmJib3g6ICAgICAgICAgICB4bWluOiAtMTE5Ljg0NDcgeW1pbjogMzcuNTEzNTYgeG1heDogLTExOS4yMTY1IHltYXg6IDM4LjA4MzY4XG5nZW9ncmFwaGljIENSUzogV0dTIDg0XG4ifQ== -->
+<pre><code>Reading layer `yose_historic_places&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_historic_pts.kml&#39; using driver `KML&#39;
+Simple feature collection with 35 features and 2 fields
+geometry type:  POINT
+dimension:      XY
+bbox:           xmin: -119.8447 ymin: 37.51356 xmax: -119.2165 ymax: 38.08368
+geographic CRS: WGS 84</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>View its properties:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgVmlldyBwcm9wZXJ0aWVzXG55b3NlX2hwX2xsXG5gYGAifQ== -->
+<pre class="r"><code>## View properties
+yose_hp_ll</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU2ltcGxlIGZlYXR1cmUgY29sbGVjdGlvbiB3aXRoIDM1IGZlYXR1cmVzIGFuZCAyIGZpZWxkc1xuZ2VvbWV0cnkgdHlwZTogIFBPSU5UXG5kaW1lbnNpb246ICAgICAgWFlcbmJib3g6ICAgICAgICAgICB4bWluOiAtMTE5Ljg0NDcgeW1pbjogMzcuNTEzNTYgeG1heDogLTExOS4yMTY1IHltYXg6IDM4LjA4MzY4XG5nZW9ncmFwaGljIENSUzogV0dTIDg0XG5GaXJzdCAxMCBmZWF0dXJlczpcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5hbWUgRGVzY3JpcHRpb24gICAgICAgICAgICAgICAgICAgZ2VvbWV0cnlcbjEgIEhldGNoIEhldGNoeSBSYWlscm9hZCBFbmdpbmUgTm8uIDYgICAgICAgICAgICAgIFBPSU5UICgtMTE5Ljc4NiAzNy42NzQzNylcbjIgICAgICAgICAgICAgSG9kZ2RvbiBIb21lc3RlYWQgQ2FiaW4gICAgICAgICAgICAgIFBPSU5UICgtMTE5LjY1NiAzNy41MzkyNClcbjMgICAgICAgICAgICAgICAgICAgICAgIFJhbmdlcnMnIENsdWIgICAgICAgICAgICAgUE9JTlQgKC0xMTkuNTg4MyAzNy43NDczNSlcbjQgICAgICAgICAgICAgICAgICAgIEJ1Y2sgQ3JlZWsgQ2FiaW4gICAgICAgICAgICAgUE9JTlQgKC0xMTkuNDg5NyAzNy41NjEzMSlcbjUgICAgICAgICAgICAgICBXYXdvbmEgQ292ZXJlZCBCcmlkZ2UgICAgICAgICAgICAgIFBPSU5UICgtMTE5LjY1NiAzNy41Mzg1OSlcbjYgICAgICAgICAgICAgQ3JhbmUgRmxhdCBGaXJlIExvb2tvdXQgICAgICAgICAgICAgUE9JTlQgKC0xMTkuODIwNyAzNy43NTk3OClcbjcgICAgICBHbGFjaWVyIFBvaW50IFRyYWlsc2lkZSBNdXNldW0gICAgICAgICAgICAgUE9JTlQgKC0xMTkuNTczMSAzNy43MjkxNilcbjggICAgICAgICAgICAgICAgICAgICAgTWNDYXVsZXkgQ2FiaW4gICAgICAgICAgICAgUE9JTlQgKC0xMTkuMzY3NiAzNy44NzgxMilcbjkgICAgICAgICAgICAgICAgICBCYWdieSBTdGF0aW9uaG91c2UgICAgICAgICAgICAgUE9JTlQgKC0xMTkuNzg2MiAzNy42NzQzOSlcbjEwICAgICAgICAgICAgICAgICAgR3JlYXQgU2llcnJhIE1pbmUgICAgICAgICAgICAgIFBPSU5UICgtMTE5LjI2ODggMzcuOTI3NilcbiJ9 -->
+<pre><code>Simple feature collection with 35 features and 2 fields
+geometry type:  POINT
+dimension:      XY
+bbox:           xmin: -119.8447 ymin: 37.51356 xmax: -119.2165 ymax: 38.08368
+geographic CRS: WGS 84
+First 10 features:
+                                 Name Description                   geometry
+1  Hetch Hetchy Railroad Engine No. 6              POINT (-119.786 37.67437)
+2             Hodgdon Homestead Cabin              POINT (-119.656 37.53924)
+3                       Rangers&#39; Club             POINT (-119.5883 37.74735)
+4                    Buck Creek Cabin             POINT (-119.4897 37.56131)
+5               Wawona Covered Bridge              POINT (-119.656 37.53859)
+6             Crane Flat Fire Lookout             POINT (-119.8207 37.75978)
+7      Glacier Point Trailside Museum             POINT (-119.5731 37.72916)
+8                      McCauley Cabin             POINT (-119.3676 37.87812)
+9                  Bagby Stationhouse             POINT (-119.7862 37.67439)
+10                  Great Sierra Mine              POINT (-119.2688 37.9276)</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -3034,6 +3171,14 @@ div.tocify {
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgUGxvdCB0aGUgYm91bmRhcnksIHRoZW4gdGhlIGhpc3RvcmljIHBsYWNlc1xue3Bsb3QoeW9zZV9ibmRfbGwgJT4lIHN0X2dlb21ldHJ5KCksIGFzcD0xKVxucGxvdCh5b3NlX2hwX2xsICU+JSBzdF9nZW9tZXRyeSgpLCBhZGQ9VFJVRSl9XG5gYGAifQ== -->
+<pre class="r"><code>## Plot the boundary, then the historic places
+{plot(yose_bnd_ll %&gt;% st_geometry(), asp=1)
+plot(yose_hp_ll %&gt;% st_geometry(), add=TRUE)}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -3042,16 +3187,52 @@ div.tocify {
 <p>Import the California county boundaries, which is saved as a GeoJSON file.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IGEgR2VvanNvbiBmaWxlXG5jb3VudGllc19mbiA8LSBcIi4vZGF0YS9jYV9jb3VudGllcy5nZW9qc29uXCJcbmZpbGUuZXhpc3RzKGNvdW50aWVzX2ZuKVxuYGBgIn0= -->
+<pre class="r"><code>## Import a Geojson file
+counties_fn &lt;- &quot;./data/ca_counties.geojson&quot;
+file.exists(counties_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>View the layers in this GeoJSON file:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgVmlldyB0aGUgbGF5ZXJzIFxuc3RfbGF5ZXJzKGNvdW50aWVzX2ZuKVxuYGBgIn0= -->
+<pre class="r"><code>## View the layers 
+st_layers(counties_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRHJpdmVyOiBHZW9KU09OIFxuQXZhaWxhYmxlIGxheWVyczpcbiJ9 -->
+<pre><code>Driver: GeoJSON 
+Available layers:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFYV3ZDTUJTOTFsUm5oeUxzRC9pOGg0TEs5anlZcjRMc3liZVN4YlFHWTFMU2xLMS8zdTJtYmNRbWNNazk1K1Irbkh6dGp0dmttQURBR0FqR09NWVVKcCtIOWVadEEwQWlSQ05VWnU3K3hWY3ZtQkNNNVlQd3pHakdkSzJzNEZVZ0xiZTcxYjZXVnF3T1dqYUZWc2d0blA2eEIzODYvT3JoWUdhczZQWGVsUFJrSW1uRFRlYWtucGtYWEYrNU5VMW1tOUtUVHptbnRqWlkzdUZKTHJnOFZjR0VtZEUvcVo4eWI0VTJobXN3U2F2UVczS2lscWE1Y1dzQTNJS1NxUzZ0MEFxTEl2ZG5jVkE4TWdFeFplZGFYZGJ2cm5HL0JRdzN1dWVrR3hYOTlTMWliNUNyUWlodlA1YjBtOHNlTE5CbGF6SXRqVkRXTzBDMlNxMjIxTDlMbUphZWFUM0I3UjlKZ3NnNUl3SUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["layer_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["geometry_type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["features"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["fields"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"ca_counties","2":"3D Multi Polygon","3":"58","4":"13"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Import the ‘ca_counties’ layer:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IHRoZSAnY2FfY291bnRpZXMnIGxheWVyIFxuY2FfY291bnRpZXNfbGwgPC0gc3RfcmVhZChjb3VudGllc19mbilcbmBgYCJ9 -->
+<pre class="r"><code>## Import the &#39;ca_counties&#39; layer 
+ca_counties_ll &lt;- st_read(counties_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVhZGluZyBsYXllciBgY2FfY291bnRpZXMnIGZyb20gZGF0YSBzb3VyY2UgYEQ6XFxXb3Jrc2hvcHNcXFItU3BhdGlhbFxccnNwYXRpYWxfbW9kXFxvdXRwdXRzXFxyc3BhdGlhbF9kYXRhXFxkYXRhXFxjYV9jb3VudGllcy5nZW9qc29uJyB1c2luZyBkcml2ZXIgYEdlb0pTT04nXG5TaW1wbGUgZmVhdHVyZSBjb2xsZWN0aW9uIHdpdGggNTggZmVhdHVyZXMgYW5kIDEzIGZpZWxkc1xuZ2VvbWV0cnkgdHlwZTogIE1VTFRJUE9MWUdPTlxuZGltZW5zaW9uOiAgICAgIFhZWlxuYmJveDogICAgICAgICAgIHhtaW46IC0xMjQuNDA5NiB5bWluOiAzMi41MzQxNiB4bWF4OiAtMTE0LjEzMTIgeW1heDogNDIuMDA5NTJcbnpfcmFuZ2U6ICAgICAgICB6bWluOiAwIHptYXg6IDBcbmdlb2dyYXBoaWMgQ1JTOiBXR1MgODRcbiJ9 -->
+<pre><code>Reading layer `ca_counties&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\ca_counties.geojson&#39; using driver `GeoJSON&#39;
+Simple feature collection with 58 features and 13 fields
+geometry type:  MULTIPOLYGON
+dimension:      XYZ
+bbox:           xmin: -124.4096 ymin: 32.53416 xmax: -114.1312 ymax: 42.00952
+z_range:        zmin: 0 zmax: 0
+geographic CRS: WGS 84</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -3068,21 +3249,62 @@ div.tocify {
 <p>Import the Yosemite’s trails from a geodatabase. First find the gdb file:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgRGVmaW5lIHRoZSBwYXRoIHRvIHRoZSBmaWxlIGdlb2RhdGFiYXNlIChhIGZvbGRlcilcbmdkYl9mbiA8LSBcIi4vZGF0YS95b3NlX3RyYWlscy5nZGJcIlxuZmlsZS5leGlzdHMoZ2RiX2ZuKVxuYGBgIn0= -->
+<pre class="r"><code>## Define the path to the file geodatabase (a folder)
+gdb_fn &lt;- &quot;./data/yose_trails.gdb&quot;
+file.exists(gdb_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>View the layers in this source:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RfbGF5ZXJzKGdkYl9mbilcbmBgYCJ9 -->
+<pre class="r"><code>st_layers(gdb_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRHJpdmVyOiBPcGVuRmlsZUdEQiBcbkF2YWlsYWJsZSBsYXllcnM6XG4ifQ== -->
+<pre><code>Driver: OpenFileGDB 
+Available layers:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OCwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJwMVN6VW9ETVJDTzdXNjdYYWcvS09qQlEvSGd3VU94RmNHYkZmV21VS3FndHlXMmFRMm1TY2xtMGIzNUNENldqK01UcUpOTlJ0dlZpeTRNMzh3My81c1puTjBleExjeElhUktBcEJxQ0NxcG5mWTczY011SVVFRnJDWHdOQ3crUWRRNktBSElLa2prSGZHMXBsemNNenBLUFZNckdMUTJiN2dZTVMxWm1pYXBVY09IUkt2TU1IUTNiN2cwVENkbVBtZjVPdWtrWjF5Yi9FUXppdXlLWmZzSzRzKzFWbm9oK0lKTDlwUHRLNUY3ZG5Ib3NDampqYlhMVEJqZXNpVmFWMFp6T2ZtM28ra2N0dTlFeVQ4MUs2WENCbmJlM3FCbjM0VDBYbDRkN2hLSFJ3NlAzN3c5YzNHL2ZLN09oby9iODdqbEVmbkk0N2JIbHNjZExMTndEYUdrVTRZL05jQkxFRFNIbDdRdTNHbkMxSlFablNjbW55RVpqUmsxbWY2NmdOcVlNd0hIczlpaG9kVmpHN3MwUVNyUGJvNm9QTXBRMEJSSFFUSWVVVVBiWTIxSEllUzlsRkpYTThPVmhLU0t2ZWl3bEx5a1MwUjllSi9KaCs2K0xWelE3bXQ2UFpyVEE5ZXE4dUZMaExna2t4TjRjcHhaMERzbThGSmgwMkxSOWt4LzMwa01iTm8yeWxDTWk0ZEtJRlBzUk40L0FZMU9xRVBCQXdBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["layer_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["geometry_type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["features"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["fields"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Trailheads","2":"Point","3":"73","4":"5"},{"1":"Trails","2":"Multi Line String","3":"1074","4":"13"},{"1":"Wilderness_stock_routes","2":"Multi Line String","3":"11","4":"6"},{"1":"Winter_trails","2":"Multi Line String","3":"24","4":"5"},{"1":"T_1_DirtyAreas","2":"Multi Polygon","3":"1","4":"3"},{"1":"T_1_PointErrors","2":"Point","3":"260","4":"7"},{"1":"T_1_LineErrors","2":"Multi Line String","3":"0","4":"8"},{"1":"T_1_PolyErrors","2":"Multi Polygon","3":"0","4":"9"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[8]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Import the ‘Trails’ layer</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IHRoZSAnVHJhaWxzJyBsYXllciAgKGNhc2Ugc2Vuc2l0aXZlISlcbnlvc2VfdHJhaWxzIDwtIHN0X3JlYWQoZ2RiX2ZuLCBsYXllcj1cIlRyYWlsc1wiKVxuYGBgIn0= -->
+<pre class="r"><code>## Import the &#39;Trails&#39; layer  (case sensitive!)
+yose_trails &lt;- st_read(gdb_fn, layer=&quot;Trails&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVhZGluZyBsYXllciBgVHJhaWxzJyBmcm9tIGRhdGEgc291cmNlIGBEOlxcV29ya3Nob3BzXFxSLVNwYXRpYWxcXHJzcGF0aWFsX21vZFxcb3V0cHV0c1xccnNwYXRpYWxfZGF0YVxcZGF0YVxceW9zZV90cmFpbHMuZ2RiJyB1c2luZyBkcml2ZXIgYE9wZW5GaWxlR0RCJ1xuU2ltcGxlIGZlYXR1cmUgY29sbGVjdGlvbiB3aXRoIDEwNzQgZmVhdHVyZXMgYW5kIDEzIGZpZWxkc1xuZ2VvbWV0cnkgdHlwZTogIE1VTFRJTElORVNUUklOR1xuZGltZW5zaW9uOiAgICAgIFhZXG5iYm94OiAgICAgICAgICAgeG1pbjogMjQ1MTM0IHltaW46IDQxNTM2NjggeG1heDogMzIzMjM5LjcgeW1heDogNDI1MDcwM1xucHJvamVjdGVkIENSUzogIE5BRDgzIC8gVVRNIHpvbmUgMTFOXG4ifQ== -->
+<pre><code>Reading layer `Trails&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_trails.gdb&#39; using driver `OpenFileGDB&#39;
+Simple feature collection with 1074 features and 13 fields
+geometry type:  MULTILINESTRING
+dimension:      XY
+bbox:           xmin: 245134 ymin: 4153668 xmax: 323239.7 ymax: 4250703
+projected CRS:  NAD83 / UTM zone 11N</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Plot Yosemite’s Trails:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgUGxvdCB0aGUgdHJhaWxzIGxheWVyXG5wbG90KHN0X2dlb21ldHJ5KHlvc2VfdHJhaWxzKSwgYXhlcz1UUlVFKVxuYGBgIn0= -->
+<pre class="r"><code>## Plot the trails layer
+plot(st_geometry(yose_trails), axes=TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -3090,6 +3312,13 @@ div.tocify {
 <p><strong>CHALLENGE</strong>: The following code does <strong>not</strong> work to make a plot of the park boundary and the trails. Can you tell why? <a href="http://bit.ly/3eSGOlZ">Answer</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxue3Bsb3QoeW9zZV9ibmRfbGwgJT4lIHN0X2dlb21ldHJ5KCkpXG5wbG90KHlvc2VfdHJhaWxzICU+JSBzdF9nZW9tZXRyeSgpLCBhZGQ9VFJVRSl9XG5gYGAifQ== -->
+<pre class="r"><code>{plot(yose_bnd_ll %&gt;% st_geometry())
+plot(yose_trails %&gt;% st_geometry(), add=TRUE)}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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Whng3NNcdc8SrboCPo1M1R3guJqip5Gru/jjaoueBn3+jZKtu4CeBn3+jZKtuwCeRrK7BvpxNQZ/iZQ8e4ls+y7iBoL+e1ck3cJLuIFwJy+Vb+MF3EC4k5fKt/ECbiDcyUvl23gBNxDu5KXybbwAG0i+52vcs4pCDSRhd7FnFYb5Si9z6loZd14yfXP0UPN6ny9GyqUL9J5T7/OFSLl0gd5zSnnpzbhzie5z6n7AABl3LtF9Tt0PGCDjziW6z6n7AQNk3LlE9zllvOlNuHKR7nPqfsAAGXcu0X1O3Q8YIOPOJbrPqfsBA2TcuUT3OXU/YICMO5fo/pvEHY8WJuPO5TpOq+PRwmTcuVzHaXU8WpiMOxfq+rah49HiZNy5UK/l7f1uPE7KpQt1mlWnY+0g7+bbdZpVp2PtIO/m2/WZVc47hou8m2/XY02S3u1eJV59uw6L0t9EO0q9/GbdpdXhX6cdpV5+s+7S6m6gXeXefqvu0vLKq7W6S8vyaq3u0upuoF3l3n6r3tLKfeHt7jj61ltavc2zs+Trb9RVWlnfjvOUfP2NOkrL6nZ1HAD9pGVzTz0dB0E/n3rquZ0MocKR0XnhPTOEYgcWyO5emEK5w7Kzu1fGUO648h71wJ0xh3KW92DmUOjIlxs8tCtzKHToaw0HPnZPzKGQ5T2eOZQ4+FsUHtqVOZTYvbzPxzv8e3sdMYdCO5f38trutbh2984gCu37Fofp8FuVHplHrb3Kqw+mUmWny6HX3K9MpcpO8XlKXxlLlX3i88L7nbFU2am8uzwKj7lU2eee10P6zlxqWd7DmEsty3sYc6lleQ9jLrXiE/TFhh/MpdYO5Q1/BCiDqWV5D2MwtaIT9P04PxlMrfDyBv/5YEZTy/IexmhqWd7DGE0ty3sYo6lleQ9jNFV2eGOOJ/ST0VTZ43vDHtEvJlNll58B2uExmEymiuU9kslU8bbhSCZTxfdDHsloqvh+yCMZTRXfUnYks6lieY9kNnXC8/O24TejqROU3+tHmsY8wgiMpk5Mty4fZDqdfCf6PLOp1b5ftz9wOnk880ynXuP23v84PwN9iek00DRET2Q1o2qgZYhebNczqgYahmh3NzCrBtbenD7/Pyymv15+OW7K8RhWGws5Tqe33r79sr0tYWJtzOdoNUOYaRsL5d1pimSMtY35K6sphzDWRizv/oy1Ecu7P2NtxPLuz1gbsbz7M9ZGLO/+jLWR2VdyTTmEsTZjefdmrM1Y3r0ZazMzNw6mHMJYG7K8+zLWhl7f2vjnMmzKIYy1ob/vzn39hUPGGZ6xRvnybnO1ZazCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzCsrzC+gc+8pjVtezaaAAAAABJRU5ErkJggg==" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -3098,11 +3327,50 @@ div.tocify {
 <p>Let’s import Yosemite’s watersheds from a geopackage file.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgSW1wb3J0IHdhdGVyc2hlZHMgZnJvbSBhIGdlb3BhY2thZ2Vcbmdwa2dfd2F0ZXJzaGRfZm4gPC0gXCIuL2RhdGEveW9zZV93YXRlcnNoZWRzLmdwa2dcIlxuZmlsZS5leGlzdHMoZ3BrZ193YXRlcnNoZF9mbilcbmBgYCJ9 -->
+<pre class="r"><code>## Import watersheds from a geopackage
+gpkg_watershd_fn &lt;- &quot;./data/yose_watersheds.gpkg&quot;
+file.exists(gpkg_watershd_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RfbGF5ZXJzKGdwa2dfd2F0ZXJzaGRfZm4pXG5gYGAifQ== -->
+<pre class="r"><code>st_layers(gpkg_watershd_fn)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRHJpdmVyOiBHUEtHIFxuQXZhaWxhYmxlIGxheWVyczpcbiJ9 -->
+<pre><code>Driver: GPKG 
+Available layers:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUJtVlFVVTdETUF6MXVuUmprVFloY1k5S0MvQ1BOQTR3OGJXL0tuUnBxY2lTS3MwMGVqdE9ObkRhR05FdWtoVy81OWgrTDIrdmgwZCs0QUF3QjRZeFR6R0Z4VzYvRmM4Q2dDV0labGhaaGZzTFh6MWd3akR1L3hXV2hkUVhJYlpUZW05MVYxbUQ2U2JRTC9rM3hEUGdIY0hSbXRUSWsycmpMQlpKcm1XblhCNUtrVmxYeXA2VWQxM3V1NGJJdTFKSmYzYllQdUJGV1N0OWJDY2JWczVlTXRxeTdndDlqR1VVV3JZa2cwaCtsRjVtcFFzeUFLNlRscVZ0ZkcwTk5pWGhtOUpKODh6ZC9OdkgyWHlLcHpBNHFvQ3hvcitjRGF1U256Z2lKWVBLVkxVaCs2bVc3MHBIc0VHWHZjbXNjYlh4NUFEWk52UFdTM3JIQzZ1SjZUM0I5UmMrSDdDc0ZnSUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["layer_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["geometry_type"],"name":[2],"type":["chr"],"align":["left"]},{"label":["features"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["fields"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"calw221","2":"Polygon","3":"127","4":"38"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueW9zZV93YXRlcnNoZWRzIDwtIHN0X3JlYWQoZ3BrZ193YXRlcnNoZF9mbiwgbGF5ZXI9XCJjYWx3MjIxXCIpXG5gYGAifQ== -->
+<pre class="r"><code>yose_watersheds &lt;- st_read(gpkg_watershd_fn, layer=&quot;calw221&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVhZGluZyBsYXllciBgY2FsdzIyMScgZnJvbSBkYXRhIHNvdXJjZSBgRDpcXFdvcmtzaG9wc1xcUi1TcGF0aWFsXFxyc3BhdGlhbF9tb2RcXG91dHB1dHNcXHJzcGF0aWFsX2RhdGFcXGRhdGFcXHlvc2Vfd2F0ZXJzaGVkcy5ncGtnJyB1c2luZyBkcml2ZXIgYEdQS0cnXG5TaW1wbGUgZmVhdHVyZSBjb2xsZWN0aW9uIHdpdGggMTI3IGZlYXR1cmVzIGFuZCAzOCBmaWVsZHNcbmdlb21ldHJ5IHR5cGU6ICBQT0xZR09OXG5kaW1lbnNpb246ICAgICAgWFlcbmJib3g6ICAgICAgICAgICB4bWluOiAxMzgzLjgyIHltaW46IC02MTQ0Mi45MyB4bWF4OiA4MTU5Ni43MSB5bWF4OiAyNjQwNS42NlxucHJvamVjdGVkIENSUzogIHVubmFtZWRcbiJ9 -->
+<pre><code>Reading layer `calw221&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_watersheds.gpkg&#39; using driver `GPKG&#39;
+Simple feature collection with 127 features and 38 fields
+geometry type:  POLYGON
+dimension:      XY
+bbox:           xmin: 1383.82 ymin: -61442.93 xmax: 81596.71 ymax: 26405.66
+projected CRS:  unnamed</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Plot the watersheds:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChzdF9nZW9tZXRyeSh5b3NlX3dhdGVyc2hlZHMpLCBheGVzPVRSVUUpXG5gYGAifQ== -->
+<pre class="r"><code>plot(st_geometry(yose_watersheds), axes=TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQzMi42MzI5LCJ3aWR0aCI6NzAwLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -3110,6 +3378,84 @@ div.tocify {
 <p><strong>CHALLENGE</strong>: What CRS are the Yosemite watersheds in? <a href="http://bit.ly/38XePO7">Answer</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RfY3JzKHlvc2Vfd2F0ZXJzaGVkcylcbmBgYCJ9 -->
+<pre class="r"><code>st_crs(yose_watersheds)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQ29vcmRpbmF0ZSBSZWZlcmVuY2UgU3lzdGVtOlxuICBVc2VyIGlucHV0OiB1bm5hbWVkIFxuICB3a3Q6XG5CT1VORENSU1tcbiAgICBTT1VSQ0VDUlNbXG4gICAgICAgIFBST0pDUlNbXCJ1bm5hbWVkXCIsXG4gICAgICAgICAgICBCQVNFR0VPR0NSU1tcIk5BRDgzXCIsXG4gICAgICAgICAgICAgICAgREFUVU1bXCJOb3J0aCBBbWVyaWNhbiBEYXR1bSAxOTgzXCIsXG4gICAgICAgICAgICAgICAgICAgIEVMTElQU09JRFtcIkdSUyAxOTgwXCIsNjM3ODEzNywyOTguMjU3MjIyMTAxLFxuICAgICAgICAgICAgICAgICAgICAgICAgTEVOR1RIVU5JVFtcIm1ldHJlXCIsMV1dXSxcbiAgICAgICAgICAgICAgICBQUklNRU1bXCJHcmVlbndpY2hcIiwwLFxuICAgICAgICAgICAgICAgICAgICBBTkdMRVVOSVRbXCJkZWdyZWVcIiwwLjAxNzQ1MzI5MjUxOTk0MzNdXSxcbiAgICAgICAgICAgICAgICBJRFtcIkVQU0dcIiw0MjY5XV0sXG4gICAgICAgICAgICBDT05WRVJTSU9OW1widW5uYW1lZFwiLFxuICAgICAgICAgICAgICAgIE1FVEhPRFtcIkFsYmVycyBFcXVhbCBBcmVhXCIsXG4gICAgICAgICAgICAgICAgICAgIElEW1wiRVBTR1wiLDk4MjJdXSxcbiAgICAgICAgICAgICAgICBQQVJBTUVURVJbXCJMYXRpdHVkZSBvZiAxc3Qgc3RhbmRhcmQgcGFyYWxsZWxcIiwzNCxcbiAgICAgICAgICAgICAgICAgICAgQU5HTEVVTklUW1wiZGVncmVlXCIsMC4wMTc0NTMyOTI1MTk5NDMzXSxcbiAgICAgICAgICAgICAgICAgICAgSURbXCJFUFNHXCIsODgyM11dLFxuICAgICAgICAgICAgICAgIFBBUkFNRVRFUltcIkxhdGl0dWRlIG9mIDJuZCBzdGFuZGFyZCBwYXJhbGxlbFwiLDQwLjUsXG4gICAgICAgICAgICAgICAgICAgIEFOR0xFVU5JVFtcImRlZ3JlZVwiLDAuMDE3NDUzMjkyNTE5OTQzM10sXG4gICAgICAgICAgICAgICAgICAgIElEW1wiRVBTR1wiLDg4MjRdXSxcbiAgICAgICAgICAgICAgICBQQVJBTUVURVJbXCJMYXRpdHVkZSBvZiBmYWxzZSBvcmlnaW5cIiwwLFxuICAgICAgICAgICAgICAgICAgICBBTkdMRVVOSVRbXCJkZWdyZWVcIiwwLjAxNzQ1MzI5MjUxOTk0MzNdLFxuICAgICAgICAgICAgICAgICAgICBJRFtcIkVQU0dcIiw4ODIxXV0sXG4gICAgICAgICAgICAgICAgUEFSQU1FVEVSW1wiTG9uZ2l0dWRlIG9mIGZhbHNlIG9yaWdpblwiLC0xMjAsXG4gICAgICAgICAgICAgICAgICAgIEFOR0xFVU5JVFtcImRlZ3JlZVwiLDAuMDE3NDUzMjkyNTE5OTQzM10sXG4gICAgICAgICAgICAgICAgICAgIElEW1wiRVBTR1wiLDg4MjJdXSxcbiAgICAgICAgICAgICAgICBQQVJBTUVURVJbXCJFYXN0aW5nIGF0IGZhbHNlIG9yaWdpblwiLDAsXG4gICAgICAgICAgICAgICAgICAgIExFTkdUSFVOSVRbXCJNZXRlclwiLDFdLFxuICAgICAgICAgICAgICAgICAgICBJRFtcIkVQU0dcIiw4ODI2XV0sXG4gICAgICAgICAgICAgICAgUEFSQU1FVEVSW1wiTm9ydGhpbmcgYXQgZmFsc2Ugb3JpZ2luXCIsLTQwMDAwMDAsXG4gICAgICAgICAgICAgICAgICAgIExFTkdUSFVOSVRbXCJNZXRlclwiLDFdLFxuICAgICAgICAgICAgICAgICAgICBJRFtcIkVQU0dcIiw4ODI3XV1dLFxuICAgICAgICAgICAgQ1NbQ2FydGVzaWFuLDJdLFxuICAgICAgICAgICAgICAgIEFYSVNbXCIoRSlcIixlYXN0LFxuICAgICAgICAgICAgICAgICAgICBPUkRFUlsxXSxcbiAgICAgICAgICAgICAgICAgICAgTEVOR1RIVU5JVFtcIk1ldGVyXCIsMV1dLFxuICAgICAgICAgICAgICAgIEFYSVNbXCIoTilcIixub3J0aCxcbiAgICAgICAgICAgICAgICAgICAgT1JERVJbMl0sXG4gICAgICAgICAgICAgICAgICAgIExFTkdUSFVOSVRbXCJNZXRlclwiLDFdXV1dLFxuICAgIFRBUkdFVENSU1tcbiAgICAgICAgR0VPR0NSU1tcIldHUyA4NFwiLFxuICAgICAgICAgICAgREFUVU1bXCJXb3JsZCBHZW9kZXRpYyBTeXN0ZW0gMTk4NFwiLFxuICAgICAgICAgICAgICAgIEVMTElQU09JRFtcIldHUyA4NFwiLDYzNzgxMzcsMjk4LjI1NzIyMzU2MyxcbiAgICAgICAgICAgICAgICAgICAgTEVOR1RIVU5JVFtcIm1ldHJlXCIsMV1dXSxcbiAgICAgICAgICAgIFBSSU1FTVtcIkdyZWVud2ljaFwiLDAsXG4gICAgICAgICAgICAgICAgQU5HTEVVTklUW1wiZGVncmVlXCIsMC4wMTc0NTMyOTI1MTk5NDMzXV0sXG4gICAgICAgICAgICBDU1tlbGxpcHNvaWRhbCwyXSxcbiAgICAgICAgICAgICAgICBBWElTW1wibGF0aXR1ZGVcIixub3J0aCxcbiAgICAgICAgICAgICAgICAgICAgT1JERVJbMV0sXG4gICAgICAgICAgICAgICAgICAgIEFOR0xFVU5JVFtcImRlZ3JlZVwiLDAuMDE3NDUzMjkyNTE5OTQzM11dLFxuICAgICAgICAgICAgICAgIEFYSVNbXCJsb25naXR1ZGVcIixlYXN0LFxuICAgICAgICAgICAgICAgICAgICBPUkRFUlsyXSxcbiAgICAgICAgICAgICAgICAgICAgQU5HTEVVTklUW1wiZGVncmVlXCIsMC4wMTc0NTMyOTI1MTk5NDMzXV0sXG4gICAgICAgICAgICBJRFtcIkVQU0dcIiw0MzI2XV1dLFxuICAgIEFCUklER0VEVFJBTlNGT1JNQVRJT05bXCJUcmFuc2Zvcm1hdGlvbiBmcm9tIE5BRDgzIHRvIFdHUzg0XCIsXG4gICAgICAgIE1FVEhPRFtcIlBvc2l0aW9uIFZlY3RvciB0cmFuc2Zvcm1hdGlvbiAoZ2VvZzJEIGRvbWFpbilcIixcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDk2MDZdXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWC1heGlzIHRyYW5zbGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MDVdXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWS1heGlzIHRyYW5zbGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MDZdXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWi1heGlzIHRyYW5zbGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MDddXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWC1heGlzIHJvdGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MDhdXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWS1heGlzIHJvdGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MDldXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiWi1heGlzIHJvdGF0aW9uXCIsMCxcbiAgICAgICAgICAgIElEW1wiRVBTR1wiLDg2MTBdXSxcbiAgICAgICAgUEFSQU1FVEVSW1wiU2NhbGUgZGlmZmVyZW5jZVwiLDEsXG4gICAgICAgICAgICBJRFtcIkVQU0dcIiw4NjExXV1dXVxuIn0= -->
+<pre><code>Coordinate Reference System:
+  User input: unnamed 
+  wkt:
+BOUNDCRS[
+    SOURCECRS[
+        PROJCRS[&quot;unnamed&quot;,
+            BASEGEOGCRS[&quot;NAD83&quot;,
+                DATUM[&quot;North American Datum 1983&quot;,
+                    ELLIPSOID[&quot;GRS 1980&quot;,6378137,298.257222101,
+                        LENGTHUNIT[&quot;metre&quot;,1]]],
+                PRIMEM[&quot;Greenwich&quot;,0,
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+                ID[&quot;EPSG&quot;,4269]],
+            CONVERSION[&quot;unnamed&quot;,
+                METHOD[&quot;Albers Equal Area&quot;,
+                    ID[&quot;EPSG&quot;,9822]],
+                PARAMETER[&quot;Latitude of 1st standard parallel&quot;,34,
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+                    ID[&quot;EPSG&quot;,8823]],
+                PARAMETER[&quot;Latitude of 2nd standard parallel&quot;,40.5,
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+                    ID[&quot;EPSG&quot;,8824]],
+                PARAMETER[&quot;Latitude of false origin&quot;,0,
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+                    ID[&quot;EPSG&quot;,8821]],
+                PARAMETER[&quot;Longitude of false origin&quot;,-120,
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433],
+                    ID[&quot;EPSG&quot;,8822]],
+                PARAMETER[&quot;Easting at false origin&quot;,0,
+                    LENGTHUNIT[&quot;Meter&quot;,1],
+                    ID[&quot;EPSG&quot;,8826]],
+                PARAMETER[&quot;Northing at false origin&quot;,-4000000,
+                    LENGTHUNIT[&quot;Meter&quot;,1],
+                    ID[&quot;EPSG&quot;,8827]]],
+            CS[Cartesian,2],
+                AXIS[&quot;(E)&quot;,east,
+                    ORDER[1],
+                    LENGTHUNIT[&quot;Meter&quot;,1]],
+                AXIS[&quot;(N)&quot;,north,
+                    ORDER[2],
+                    LENGTHUNIT[&quot;Meter&quot;,1]]]],
+    TARGETCRS[
+        GEOGCRS[&quot;WGS 84&quot;,
+            DATUM[&quot;World Geodetic System 1984&quot;,
+                ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+                    LENGTHUNIT[&quot;metre&quot;,1]]],
+            PRIMEM[&quot;Greenwich&quot;,0,
+                ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS[&quot;latitude&quot;,north,
+                    ORDER[1],
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+                AXIS[&quot;longitude&quot;,east,
+                    ORDER[2],
+                    ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+            ID[&quot;EPSG&quot;,4326]]],
+    ABRIDGEDTRANSFORMATION[&quot;Transformation from NAD83 to WGS84&quot;,
+        METHOD[&quot;Position Vector transformation (geog2D domain)&quot;,
+            ID[&quot;EPSG&quot;,9606]],
+        PARAMETER[&quot;X-axis translation&quot;,0,
+            ID[&quot;EPSG&quot;,8605]],
+        PARAMETER[&quot;Y-axis translation&quot;,0,
+            ID[&quot;EPSG&quot;,8606]],
+        PARAMETER[&quot;Z-axis translation&quot;,0,
+            ID[&quot;EPSG&quot;,8607]],
+        PARAMETER[&quot;X-axis rotation&quot;,0,
+            ID[&quot;EPSG&quot;,8608]],
+        PARAMETER[&quot;Y-axis rotation&quot;,0,
+            ID[&quot;EPSG&quot;,8609]],
+        PARAMETER[&quot;Z-axis rotation&quot;,0,
+            ID[&quot;EPSG&quot;,8610]],
+        PARAMETER[&quot;Scale difference&quot;,1,
+            ID[&quot;EPSG&quot;,8611]]]]</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><br />
@@ -3171,7 +3517,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("nb04_import-gis-data.Rmd");
+  window.initializeSourceEmbed("nb_import-gis-data.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
