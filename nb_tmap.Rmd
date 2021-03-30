@@ -1,5 +1,5 @@
 ---
-title: "Make a Map of the Yosemite"
+title: "Make a Map of Yosemite"
 output: 
   html_notebook:
     toc: yes
