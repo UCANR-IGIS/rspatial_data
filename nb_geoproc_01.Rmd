@@ -1,0 +1,181 @@
+---
+title: "Geoprocessing 1 - Geometric Measurements"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook we will use functions from `sf` that measure geometric properties (area, length, distance). 
+
+- compute the total area of YNP in meters^2^ and miles^2^  
+- compute the area of watersheds   
+- compute the total length of roads  
+- compute the distance between campgrounds and cell towers    
+
+## Setup
+
+Load the packages we'll need and set tmap mode to 'plot':
+
+```{r chunk01}
+library(sf)
+library(units)
+library(tmap)
+tmap_mode("plot")
+```
+
+Load `dplyr` and set name conflict preferences:
+
+```{r chunk02}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+## Import the Park Boundary
+
+```{r chunk03}
+## Define a convenience variable for UTM Zone 11
+epsg_utm11n_nad83 <- 26911
+
+## Import the YNP border
+yose_bnd_utm <- st_read(dsn="./data", layer="yose_boundary") %>% 
+  st_transform(epsg_utm11n_nad83)
+```
+
+## Compute the area of the park
+
+Find area with `st_area()`:
+
+```{r chunk04}
+yose_area <- yose_bnd_utm %>% st_area()
+yose_area
+```
+
+Find the area in miles^2^.
+
+```{r chunk05}
+## View in square miles
+set_units(yose_area, mi^2)
+```
+
+## Import the Watersheds
+
+Next import the watershed boundaries.
+
+```{r chunk06}
+yose_watersheds_utm <- st_read("./data/yose_watersheds.gpkg", layer="calw221") %>% 
+  st_transform(epsg_utm11n_nad83) %>% 
+  select(CALWNUM, HU, HRNAME, RBNAME, HUNAME, HANAME, CDFSPWNAME, CDFPWSNAME, HUC_8, HUC_8_NAME)
+
+yose_watersheds_utm %>% slice(1:10) %>% as_tibble()
+
+tm_shape(yose_watersheds_utm) +
+  tm_borders() +
+tm_shape(yose_bnd_utm) +
+  tm_borders(col="red", lwd=3)
+```
+
+**CHALLENGE** Compute the watershed areas, and add them as a new column in the attribute table. [Answer](https://bit.ly/3dov9Zw)
+
+```{r chunk07}
+
+```
+
+**CHALLENGE** Find the largest watershed, and report the area in acres. [Answer](https://bit.ly/3uaY4HE)
+
+```{r chunk08}
+
+```
+
+## Import the Roads
+
+```{r chunk09}
+yose_roads_utm <- st_read("./data/yose_roads.gdb", "Yosemite_Roads") %>% 
+  st_transform(epsg_utm11n_nad83) %>% 
+  select(RDNAME, RTENUMBER, YOSE_Surface, YOSE_FIRE_ROAD, YOSE_INPARK, YOSE_Type)
+```
+
+Compute the length of roads and save it in the attribute table:
+
+```{r chunk10}
+yose_roads_utm <- yose_roads_utm %>% 
+  mutate(rd_length = st_length(yose_roads_utm))
+yose_roads_utm %>% slice(1:10) %>% as_tibble()
+```
+
+**CHALLENGE** Find the total length for each type of Road (see YOSE_Type) in miles. [Answer](https://bit.ly/3wbbLbb)
+
+```{r chunk11}
+
+```
+
+## Import the Campgrounds and Cell Towers
+
+```{r chunk12}
+yose_campgrounds_utm <- st_read("./data", layer="yose_poi") %>% 
+  st_transform(epsg_utm11n_nad83) %>% 
+  filter(POITYPE == 'Campground') %>% 
+  select(POINAME)
+  
+yose_celltwrs_utm <- st_read("./data/yose_communications.gdb", "Cell_Towers") %>% 
+  st_transform(epsg_utm11n_nad83) 
+```
+
+Plot them:
+
+```{r chunk13}
+tm_shape(yose_bnd_utm) +
+  tm_borders() +
+tm_shape(yose_campgrounds_utm) +
+  tm_symbols(size = 0.3, col = "blue") +
+tm_shape(yose_celltwrs_utm) +
+  tm_symbols(size = 0.3, col = "red") 
+```
+
+## Compute Distances Between Features - 1 sf data frame
+
+`st_distance()` can be used to compute distances between features. If you pass it one sf object, it will return a symmetric distance matrix between all pairs of features. 
+
+Compute the distance between all pairs of campgrounds:
+
+```{r chunk14}
+campgrounds_dist_mat <- st_distance(yose_campgrounds_utm)
+campgrounds_dist_mat
+```
+
+
+## Compute Distances Between Features - 2 sf data frames
+
+If you pass two sf objects to `st_distance()`, it will return a *n x m* matrix containing the distance between all pairs of features. 
+
+Compute the distance between all pairs of campgrounds and cell towers:
+
+```{r chunk15}
+cgct_dist_mat <- st_distance(yose_campgrounds_utm, yose_celltwrs_utm)
+cgct_dist_mat
+```
+
+**CHALLENGE** For the first campground (row), which is the closest cell tower? [Answer](https://bit.ly/3webTXp)
+
+Hint: use `which.min()`
+
+```{r chunk16}
+
+```
+
+## End
+
+Congratulations, you've completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
+
+
