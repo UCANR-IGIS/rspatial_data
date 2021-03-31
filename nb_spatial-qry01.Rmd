@@ -1,0 +1,126 @@
+---
+title: "Spatial Queries - Find Yosemite POIs in the Merced Watershed"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook we'll use geoprocessing functions  from `sf` to find points-of-interest that call within the Merced watershed. 
+
+## Setup
+
+Load the packages we'll need and set tmap mode to 'plot':
+
+```{r}
+library(sf)
+library(tmap)
+tmap_mode("plot")
+```
+
+Load `dplyr` and set name conflict preferences:
+
+```{r}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+## Import the Watersheds and POIs
+
+Start by importing the watersheds, grouping by HU (larger watershed units):
+
+```{r}
+## Import the watersheds, grouping by HUNAME
+gpkg_watershd_fn <- "./data/yose_watersheds.gpkg"
+yose_watersheds_hu <- st_read(gpkg_watershd_fn, layer="calw221") %>% 
+  group_by(HU) %>% 
+  summarise(HUNAME = first(HUNAME), NUM_WATERSHEDS = n())
+
+tm_shape(yose_watersheds_hu) + 
+  tm_polygons("MAP_COLORS", palette = "Pastel1") +
+  tm_text("HUNAME", size = 0.7)
+```
+
+Pull out just Merced watershed:
+
+```{r}
+## Filter out just the Merced River watershid
+merced_watershed <- yose_watersheds_hu %>% 
+  filter(HUNAME == "MERCED RIVER")
+```
+
+Next import the points of interest:
+
+```{r}
+## Import points of interest
+yose_poi_utm <- st_read(dsn="./data", layer="yose_poi") %>% 
+  select(OBJECTID, POINAME, POILABEL, POITYPE)
+```
+
+## Find Intersection
+
+Find out which POIs intersect:
+
+```{r}
+try(merced_poi <- yose_poi %>% st_intersects(merced_watershed))
+```
+
+ERROR message! Spatial querying requires features to be in the same crs!
+
+Project the HU watershed layer (which is in Albers) to match the points of interest (which are UTM):
+
+```{r}
+merced_hu_utm <- merced_watershed %>% 
+  st_transform(st_crs(yose_poi_utm))
+```
+
+Try the intersects test again:
+
+```{r}
+yose_poi_merced_yn <- yose_poi_utm %>% st_intersects(merced_hu_utm, sparse=FALSE)
+head(yose_poi_merced_yn)
+```
+
+**CHALLENGE** How many points-of-interest fall within the Merced Rivershed watershed polygon? [Answer]()
+
+Hint: This is equivalent to asking how many TRUE values there are in the first column of yose_poi_merced_yn.
+
+To get the first column of a matrix `x`, use `x[ , 1]`.
+
+
+```{r}
+
+```
+
+## Plot the Intersection
+
+Plot the results to make sure:
+
+```{r}
+## Extract the points that intersect the watershed to a new sf object
+merced_poi_utm <- yose_poi_utm %>% 
+  filter(yose_poi_merced_yn[,1])
+
+## Plot
+tm_shape(merced_hu_utm) +
+  tm_borders() +
+tm_shape(yose_poi_utm) +
+  tm_dots(size = 0.2) +
+tm_shape(merced_poi_utm) +
+  tm_dots(size = 0.2, col = "blue")
+```
+
+## End
+
+Congratulations, you've completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+

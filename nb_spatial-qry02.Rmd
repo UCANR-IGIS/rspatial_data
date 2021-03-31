@@ -1,0 +1,117 @@
+---
+title: "Spatial Queries - Generate Sample Points"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook we'll use geoprocessing functions  from `sf` to generate 500 randomly distributed sample points within YNP. 
+
+## Setup
+
+Load the packages we'll need and set tmap mode to 'plot':
+
+```{r}
+library(sf)
+library(tmap)
+tmap_mode("plot")
+```
+
+Load `dplyr` and set name conflict preferences:
+
+```{r}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+## Import the Park Boundary
+
+First, we import the boundary:
+
+```{r}
+## Define a convenience variable for UTM Zone 11
+epsg_utm11n_nad83 <- 26911
+
+## Import the YNP border
+yose_bnd_utm <- st_read(dsn="./data", layer="yose_boundary") %>% 
+  st_transform(epsg_utm11n_nad83)
+```
+
+## Generate Random Points
+
+Next, generate uniformly distributed random numbers between the x and y ranges
+
+```{r}
+n <- 500
+yose_ext <- st_bbox(yose_bnd_utm)
+xs <- runif(n * 3, min = yose_ext[1], max = yose_ext[3])
+ys <- runif(n * 3, min = yose_ext[2], max = yose_ext[4])
+```
+
+Create a sf object from the random points
+
+```{r}
+rand_pts <- st_as_sf(data.frame(lon = xs, lat = ys), 
+                     coords = c("lon", "lat"), 
+                     crs=st_crs(yose_bnd_utm))
+
+## Plot
+plot(rand_pts, axes=T, pch=16, cex=0.5)
+```
+
+Next, test which points fall within the park boundary, and save those to a new object.
+
+```{r}
+## Test which points are within the YNP boundary
+in_yose_mat <- st_within(rand_pts, yose_bnd_utm, sparse = FALSE)
+head(in_yose_mat)
+
+## Save those in the park to a new sf object
+pts_in_park <- rand_pts %>% filter(in_yose_mat[,1])
+nrow(pts_in_park)
+```
+Plot the results:
+
+```{r}
+tm_shape(yose_bnd_utm) + 
+  tm_borders(col="palegreen4", lwd = 4) +
+tm_shape(pts_in_park) + 
+  tm_dots(size = 0.1, col="gray20")
+```
+
+Lastly, all we need is 500 points so take a random sample:
+
+```{r}
+## Take a random sample of the points 
+pts_in_park_500 <- pts_in_park %>% 
+  sample_n(n)
+
+## Plot
+tm_shape(yose_bnd_utm) + 
+  tm_borders(col="palegreen4", lwd = 4) +
+tm_shape(pts_in_park_500) + 
+  tm_dots(size = 0.1, col = "gray20")
+```
+
+
+**CHALLENGE** For each campground, find all sample points within 2000m and compute the distances.
+
+```{r}
+
+```
+
+## End
+
+Congratulations, you have completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
