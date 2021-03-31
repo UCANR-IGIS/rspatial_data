@@ -1,8 +1,9 @@
-~*.Rmd
+nb*_ans.Rmd
 ~*.html
+~*.Rmd
 ZMB*
 gadm36*
 *.bak
-nb*_ans.*
 .gitignore
 /*nb.html
+### no longer excluded: nb*_ans.*
