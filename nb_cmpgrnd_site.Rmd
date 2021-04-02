@@ -1,0 +1,371 @@
+---
+title: "Site a New Campsite in YNP"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook we'll look for suitable places for new campsites in Yosemite that meet the following criteria:
+
+- within 100m of an existing trail  
+- slope < 10%  
+- within 100m of a stream  
+
+This is an example of a *Multi Criteria Overlay Analysis* (MCA) whereby each individual criteria is converted into a binary raster mask, which are then fed into a raster algebra expression to find the pixels where all criteria are met. The trick to doing this is to make sure each binary 
+
+\
+
+## Import Layers for Yosemite National Park
+
+For this analysis we'll need the park boundary, the trails network and a DEM (elevation) of the park (from which we can derive slope).
+
+Begin by importing the vector layers:
+
+```{r chunk01}
+library(sf)
+
+## Import the park boundary
+bnd_fn <- "./data/yose_boundary.shp"
+file.exists(bnd_fn)
+yose_bnd_ll <- st_read(bnd_fn)
+
+## Import the trails
+trails_gdb_fn <- "./data/yose_trails.gdb"
+file.exists(trails_gdb_fn)
+yose_trails <- st_read(trails_gdb_fn, layer="Trails")
+
+## Import the rivers and streams
+hydro_gdb_fn <- "./data/yose_hydrology.gdb"
+file.exists(hydro_gdb_fn)
+yose_streams <- st_read(hydro_gdb_fn, layer="Rivers")
+```
+
+## Project Everything to UTM
+
+Because one of our criteria involves area, we'll project everything to UTM 11N (EPSG 32611):
+
+```{r chunk02}
+epsg_utm11n_wgs84 <- 32611
+
+yose_bnd_utm <- st_transform(yose_bnd_ll, epsg_utm11n_wgs84)
+
+yose_trails_utm <- st_transform(yose_trails, epsg_utm11n_wgs84)
+
+yose_streams_utm <- st_transform(yose_streams, epsg_utm11n_wgs84)
+
+```
+
+Plot them to verify it worked:
+
+```{r chunk03}
+{plot(yose_bnd_utm %>% st_geometry(), border = "red", lwd = 2)
+plot(yose_streams_utm %>% st_geometry(), col = "lightcyan2", add = TRUE)
+plot(yose_trails_utm %>% st_geometry(), col = "grey50", add = TRUE)}
+```
+
+## Import the DEM
+
+We have elevation data in the form of a tile of SRTM data.
+
+```{r chunk04}
+library(raster)
+srtm1305_fn <- "./data/srtm_13_05.tif"
+file.exists(srtm1305_fn)
+srtm1305_rst <- raster(srtm1305_fn)
+srtm1305_rst
+```
+
+## Crop the DEM to the Park Boundary
+
+Note the SRTM data is in geographic coordinates. To see how big it is we'll overlay the park boundary on it:
+
+```{r chunk05}
+{plot(srtm1305_rst)
+plot(yose_bnd_ll %>% st_geometry(), border = "red", lwd = 2, add = TRUE)}
+```
+
+```{r chunk06}
+yose_dem_rst_ll <- raster::crop(srtm1305_rst, yose_bnd_ll)
+yose_dem_rst_ll
+```
+
+Plot to make sure it worked:
+
+```{r chunk07}
+{plot(yose_dem_rst_ll)
+plot(yose_bnd_ll %>% st_geometry(), border = "red", lwd = 2, add = TRUE)}
+```
+
+Lastly, we need to project the park DEM into UTM using `projectRaster()` with the following arguments:
+
+- `from`: the raster we want to project 
+- `to`: omitted in this case (because we're supplying `crs` and `res`)  
+- `crs`: pass a proj4 string  
+- `res`: resolution in map units (which in the case of UTM is meters)  
+- `method`: choose 'blinear' but the cell values (elevation MSL) are continuous, and we want the interpolated values to also be continuous  
+
+```{r chunk08}
+## Define the proj4 string for UTM 11N
+utm11n_wgs84_proj4 <- "+init=epsg:32611"
+
+yose_dem_rst_utm <- projectRaster(from = yose_dem_rst_ll, 
+                              crs = CRS(utm11n_wgs84_proj4), 
+                              res = 90, 
+                              method = "bilinear")
+yose_dem_rst_utm
+```
+
+Plot to make sure it worked:
+
+```{r chunk09}
+{plot(yose_dem_rst_utm)
+plot(yose_bnd_utm %>% st_geometry(), border = "red", lwd = 2, add = TRUE)}
+```
+
+## Compute Slope
+
+Slope is one of the criteria for our campsite. We can compute the slope from the DEM using the `raster::terrain()`:
+
+```{r chunk10}
+yose_slope_rst <- raster::terrain(yose_dem_rst_utm, opt="slope")
+yose_slope_rst
+```
+
+Plot to make sure it worked. Note that slope is measured in radians.
+
+```{r chunk11}
+plot(yose_slope_rst)
+```
+
+## Create a Binary Mask for Slope
+
+We create a binary mask of the pixels whose slope < 10%. 
+
+```{r chunk12}
+## To convert the percent slope to an angle, we use arctan (which returns radians)
+max_slope_rad <- atan(0.1) 
+
+## Create the TRUE / FALSE mask with a raster algebra expression
+yose_lowslope_msk_rst <- (yose_slope_rst <= max_slope_rad)
+yose_lowslope_msk_rst
+```
+
+Plot to make sure it worked:
+
+```{r chunk13}
+plot(yose_lowslope_msk_rst, legend = FALSE, main = "Low Slope Areas")
+```
+
+## Compute the Distance to Trails Surface
+
+We'll compute the distance to trails surface (also known as a proximity surface) using `raster::distance()`. The raster we pass to the function should contain '1' values for all cells that we want to compute distance to (i.e., the trails), and `NA` for everything else.  
+
+Therefore we first need to create a rasterized version of the trails. For this we use `raster::rasterize()`, passing  `yosedem_rst_utm` as the 'template' for the new raster layer, and field = 1 to tell it to assign a '1' to cells that contain a trail.
+
+```{r chunk14}
+# The raster::rasterize() function works, but takes 4-5 minutes!
+# yose_trails_rst_utm <- raster::rasterize(x = yose_trails_utm, 
+#                                  y = yose_dem_rst_utm,
+#                                  field = 1)
+
+## Faster method using stars
+library(stars)
+library(dplyr)
+
+## Rasterize the trails as a stars object
+yose_trails_stars <- stars::st_rasterize(sf = yose_trails_utm %>% transmute(field = 1),
+                          template = stars::st_as_stars(setValues(yose_dem_rst_utm, NA)))
+  
+## Convert the stars object to a raster object
+yose_trails_rst_utm <- as(yose_trails_stars, "Raster")
+yose_trails_rst_utm
+```
+
+Plot it to make sure it looks right:
+
+```{r chunk15}
+plot(yose_trails_rst_utm, col = "red", legend = FALSE, main = "Yosemite Trails Rasterized")
+```
+
+View how many cells have a trail:
+
+```{r chunk16}
+freq(yose_trails_rst_utm)
+```
+
+Next we compute the distance surface. Note this can take up to a minute.
+
+```{r chunk17, cache=TRUE}
+## Compute the distance surface. Note this can take up to a minute.
+yose_dist2trails_rst_utm <- raster::distance(yose_trails_rst_utm)
+
+## Plot 
+{plot(yose_dist2trails_rst_utm, main = "YNP Distance to Trails (m)")
+plot(yose_trails_utm %>% st_geometry(), col="red", add=TRUE)
+plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, add=TRUE)}
+```
+
+## Create a Binary Mask for Distance to Trails
+
+Our criteria state that the new campsite must be <100 m from an existing trail.
+
+```{r chunk18}
+## Create the TRUE / FALSE mask with a raster algebra expression
+yose_dist2trails_msk_utm <- (yose_dist2trails_rst_utm <= 100)
+yose_dist2trails_msk_utm
+```
+
+Plot to make sure it worked:
+
+```{r chunk19}
+plot(yose_dist2trails_msk_utm, legend = FALSE, main = "Areas <100m from trails")
+```
+
+
+
+
+## Compute the Distance to Streams Surface
+
+Distance to streams is computed the same way we computed distance to trails:
+
+```{r chunk20}
+## Rasterize the streams using stars 
+yose_streams_rst_utm <- stars::st_rasterize(sf = yose_streams_utm %>% transmute(field = 1),
+                          template = stars::st_as_stars(setValues(yose_dem_rst_utm, NA))) %>%
+  as(., "Raster")
+yose_streams_rst_utm
+
+# Plot it to make sure it looks right:
+plot(yose_streams_rst_utm, col = "red", legend = FALSE, main = "Yosemite Streams Rasterized")
+
+## Compute the distance surface. Note this can take a couple of minutes
+yose_dist2streams_rst_utm <- raster::distance(yose_streams_rst_utm)
+
+## Plot 
+{plot(yose_dist2streams_rst_utm, main = "YNP Distance to Streams (m)")
+plot(yose_streams_utm %>% st_geometry(), lwd = 0.1, cex = 0.1, col="blue", add=TRUE)
+plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, add=TRUE)}
+```
+
+## Create a Binary Mask for Distance to Streams
+
+Our criteria state that the new campsite must be <100 m from a stream.
+
+```{r chunk21}
+## Create the TRUE / FALSE mask with a raster algebra expression
+yose_dist2streams_msk_utm <- (yose_dist2streams_rst_utm <= 100)
+yose_dist2streams_msk_utm
+```
+
+Plot to make sure it worked:
+
+```{r chunk22}
+plot(yose_dist2streams_msk_utm, legend = FALSE, main = "Areas <100m from streams")
+```
+
+
+## Combine Masks
+
+The last step is to multiply our three masks together using raster algebra. The result will be a raster where '1' in cell where all three criteria were met, and 0 everywhere else.
+
+```{r chunk23}
+campsite_ok_rst <- yose_dist2trails_msk_utm * yose_lowslope_msk_rst * yose_dist2streams_msk_utm
+campsite_ok_rst
+```
+
+Plot to make sure it worked:
+
+```{r chunk24}
+{plot(campsite_ok_rst, main = "Suitable Areas for Campsites in YNP")
+plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, add=TRUE)}
+```
+
+## Crop and Mask the Results to the Park Boundary
+
+We can't build campsites outside the park, so our last task is to crop and mask the results to the park boundary. Actually we don't have to crop, we did that when we cropped the SRTM tile above. 
+
+```{r chunk25}
+campsite_ok_msk_rst <- raster::mask(campsite_ok_rst, yose_bnd_utm)
+campsite_ok_msk_rst
+```
+
+Plot it to make sure it worked:
+
+```{r chunk26}
+{plot(campsite_ok_msk_rst, main = "Suitable Areas for Campsites in YNP")
+plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, add=TRUE)}
+```
+
+\
+
+**CHALLENGE**: What is the total area suitable for campsites?
+
+```{r chunk27}
+## Find out how many pixels have a value of '1'
+pixel_vals_mat <- freq(campsite_ok_msk_rst)
+num_pixels_valone <- pixel_vals_mat[ which(pixel_vals_mat[,1] == 1), "count"]
+
+## Multiple the number of pixels = 1 times the area of a single pixel
+area_m2 <- (num_pixels_valone * 90 ^ 2) %>% as.numeric()
+area_acres <- area_m2 / 4046.86 
+area_acres
+```
+
+\
+
+## CHALLENGE: One more criteria
+
+Add one more criteria - exclude areas within 100m of an existing campsite. Hint: campsites are included in the yose_poi.shp layer.
+
+```{r chunk28}
+## Import the campsites from the points-of-interest Shapefile
+poi_shp_fn <- "./data/yose_poi.shp"
+file.exists(poi_shp_fn)
+
+## Import the POI, filter to campsites, project to UTM 11N WGS84, and keep just the name and type columns
+yose_poi_utm <- st_read(poi_shp_fn) %>% 
+  filter(POITYPE == "Campsite") %>% 
+  st_transform(epsg_utm11n_wgs84) %>% 
+  select(POINAME, POITYPE)
+
+## Plot the campsites to make sure it worked
+{plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, axes = TRUE)
+plot(yose_poi_utm %>% st_geometry(), pch = 16, cex = 0.1, color = "brown", add = TRUE)}
+
+## Create a buffer around the campsites
+yose_poibuff_utm <- st_buffer(yose_poi_utm, dist = 100)
+
+## Rasterize the campsite buffers using stars 
+yose_poibuf_rst_utm <- stars::st_rasterize(sf = yose_poibuff_utm %>% transmute(field = 1),
+                          template = stars::st_as_stars(setValues(yose_dem_rst_utm, NA))) %>%
+  as(., "Raster")
+
+# Plot the rasterized buffers to make sure it looks right:
+plot(yose_poibuf_rst_utm, legend = FALSE, col = "black", main = "Existing Campsite Buffers Rasterized")
+
+## Create a binary mask using a raster algebra expression
+yose_poibufmsk_rst_utm <- (is.na(yose_poibuf_rst_utm))
+
+## See how many pixels have a value of 1
+freq(yose_poibufmsk_rst_utm)
+
+## Plot it to make sure
+plot(yose_poibufmsk_rst_utm, main = "Areas Away from Existing Campsites")
+
+## Combine with previous masks
+campsite_ok2_rst <- campsite_ok_msk_rst * yose_poibufmsk_rst_utm
+campsite_ok2_rst
+```
+
+Plot to make sure it worked:
+
+```{r chunk29}
+{plot(campsite_ok2_rst, main = "Suitable Areas for NEW Campsites in YNP")
+plot(yose_bnd_utm %>%  st_geometry(), col=NA, border="black", lwd=2, add=TRUE)}
+```
+
+## End
+
+Save your Notebook to generate a HTML preview of the code you ran.
+
