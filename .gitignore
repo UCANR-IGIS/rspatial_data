@@ -4,6 +4,7 @@ nb*_ans.Rmd
 ZMB*
 gadm36*
 *.bak
+data/yose_hydrology.gdb/*
 .gitignore
 /*nb.html
 ### no longer excluded: nb*_ans.*
