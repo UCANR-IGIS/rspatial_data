@@ -70,15 +70,20 @@ mtcars$mpg
 
 \
 
-**CHALLENGE**: Compute the average mpg of vehicles in mtcars. [Answer](http://bit.ly/310o8bW)
+## CHALLENGE: Compute the average mpg
+
+Compute the average mpg of vehicles in mtcars. [Answer](http://bit.ly/310o8bW)
 
 ```{r chunk07}
+# Your answer here
 
 ```
 
 \
 
-**CHALLENGE**: Answer the following questions about the `quakes` data frame, which has data about some earthquakes: [Answer](http://bit.ly/3eUoyIV)
+## CHALLENGE: Summarise quakes dataframe
+
+Answer the following questions about the `quakes` data frame, which has data about some earthquakes: [Answer](http://bit.ly/3eUoyIV)
 
 1) How many rows and columns does it contain?  
 2) What is the average magnitude of the earthquakes recorded in this data frame?  
@@ -86,6 +91,7 @@ mtcars$mpg
 4) In which year was the earliest earthquake recorded?  
 
 ```{r chunk08}
+# Your answer here
 
 ```
 
@@ -118,17 +124,24 @@ quakes[ quakes$mag >= 5.9,  ]
 
 \
 
-**CHALLENGE**: How many earthquakes were detected by 100 or more stations? [Answer])(http://bit.ly/3s51wTq)
+## CHALLENGE: 100-station Quakes
+
+How many earthquakes were detected by 100 or more stations? [Answer](http://bit.ly/3s51wTq)
 
 ```{r chunk12}
+# Your answer here
 
 ```
 
 \
 
-**CHALLENGE**: What was the largest earthquake on record? [Answer](http://bit.ly/391H7Hs)
+## CHALLENGE: Largest earthquake on record
+
+What was the largest earthquake on record? [Answer](http://bit.ly/391H7Hs)
 
 ```{r chunk13}
+# Your answer here
+
 
 ```
 
@@ -160,9 +173,12 @@ quakes[mag_topten_idx, ]
 
 \
 
-**CHALLENGE**: Using the mtcars data frame, compute the average mpg for 4, 6, and 8 cylinder vehicles. [Answer](http://bit.ly/3s6meSL)
+## CHALLENGE: Average mpg
+
+Using the mtcars data frame, compute the average mpg for 4, 6, and 8 cylinder vehicles. [Answer](http://bit.ly/3s6meSL)
 
 ```{r chunk17}
+# Your answer here
 
 ```
 

@@ -50,9 +50,12 @@ HINT: remember to use '==' to test for equality
 iris %>% filter(Sepal.Length > 7, Species=="virginica")
 ```
 
-**CHALLENGE**: Write an expression that will return rows where the Petal.Length is between 4.1 and 4.4. [Answer](https://bit.ly/3tNPVIH)
+## CHALLENGE: Filter
+
+Write an expression that will return rows where the Petal.Length is between 4.1 and 4.4. [Answer](https://bit.ly/3tNPVIH)
 
 ```{r chunk05}
+# Your answer here
 
 ```
 
@@ -82,7 +85,7 @@ iris %>%
 
 Add `arrange()` to your expression to sort rows. For example to sort the last expression by `Sepal.Width` we simply add one more piece to the expression:
 
-```{r chunk08a}
+```{r chunk08}
 iris %>% 
   filter(Sepal.Length > 7) %>% 
   select(Sepal.Length, Sepal.Width, Species) %>% 
@@ -91,18 +94,21 @@ iris %>%
 
 To sort rows in descending order, wrap the field name in `desc()`:
 
-```{r chunk08b}
+```{r chunk09}
 iris %>% 
   filter(Sepal.Length > 7) %>% 
   select(Sepal.Length, Sepal.Width, Species) %>% 
   arrange(desc(Sepal.Width))
 ```
 
-**CHALLENGE**: Write an expression that returns the top-5 Petal Lengths (all species)
+## CHALLENGE: Top-n Values
+
+Write an expression that returns the top-5 Petal Lengths (all species)
 
 Hint: there are a couple of ways to do this. Look at the dplyr [Cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) for inspiration. [Answer](https://bit.ly/3d9rVsS)
 
-```{r chunk08c}
+```{r chunk10}
+# Your answer here
 
 ```
 
@@ -110,11 +116,13 @@ Hint: there are a couple of ways to do this. Look at the dplyr [Cheatsheet](http
 
 Create a new column which contains the product of the Sepal Length and Petal Length. 
 
-```{r chunk09}
+```{r chunk11}
 iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
 ```
 
-**CHALLENGE**: Write an expression from the `quakes` data frame that:
+## CHALLENGE: Filter on Multiple Columns
+
+Write an expression from the `quakes` data frame that:
 
 - returns the lat, long, and mag columns  
 - only return quakes that are i) north of 20 degrees South, and ii) larger than magnitude 5.0. 
@@ -122,7 +130,8 @@ iris %>% mutate(sepal_petal_product = Sepal.Length * Petal.Length)
 
 Hint: Fiji is south of the equator. [Answer](https://bit.ly/3fdflLR)
 
-```{r chunk10}
+```{r chunk12}
+# Your answer here
 
 ```
 
@@ -132,14 +141,17 @@ You can 'group' rows using `group_by()`. By itself, grouping rows doesn't do muc
 
 Example: for each Species in iris, compute the mean petal length and width
 
-```{r chunk11}
+```{r chunk13}
 iris %>% group_by(Species) %>% 
   summarise(avg_petal_length = mean(Petal.Length), avg_petal_width = mean(Petal.Width))
 ```
 
-**CHALLENGE**: For each species in iris, compute the minimum and maximum sepal length.
+## CHALLENGE: Group and Summarise
 
-```{r chunk12}
+For each species in iris, compute the minimum and maximum sepal length. [Answer](https://bit.ly/2UthlaT)
+
+```{r chunk14}
+# Your answer here
 
 ```
 
@@ -148,4 +160,5 @@ iris %>% group_by(Species) %>%
 Congratulations, you have completed the Notebook! 
 
 To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
 
