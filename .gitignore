@@ -1,6 +1,8 @@
 nb*_ans.Rmd
 ~*.html
 ~*.Rmd
+~*.R
+~*.zip
 ZMB*
 gadm36*
 *.bak

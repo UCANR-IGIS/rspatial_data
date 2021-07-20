@@ -1,0 +1,106 @@
+---
+title: "Files and Folders"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+## About this R Notebook
+
+R Notebooks are a 'flavor' of R markdown that combine plain text with R commands in code chunks. You can (and should!) edit them, and save it every few minutes like anything else!
+
+Minimize the console. You won't need it because the output will appear below each code chunk.
+
+To view a copy of your notebook as HTML, just hit Save, then Preview.
+
+Useful keyboard shortcuts:
+
+ - run the current line of R: *ctrl + enter*
+ - run everything in the current code chunk: *ctrl + shift + enter*
+ - insert a new code chunk: *ctrl + alt + i*
+
+## List Files in a Directory
+
+View the working directory:
+
+```{r chunk01}
+getwd()
+```
+List the files in the current working directory. Note '.' is shorthand for the current working directory.
+
+```{r chunk02}
+list.files(".")
+```
+
+\
+
+**CHALLENGE**. List all the files in your 'Home' directory. (Hint: the shortcut for the Home directory is '~') [Answer](http://bit.ly/38UPrbQ)
+
+```{r chunk03}
+
+```
+
+List the Shapefiles in the 'data' directory.
+
+```{r chunk04}
+list.files("./data", pattern = "*.shp")
+```
+
+## Verify a File Exists
+
+Write an expression that will check if a file named "sf_libraries.csv" exists in the data directory.
+
+```{r chunk05}
+file.exists("./data/sf_libraries.csv")
+```
+
+## Import a CSV File
+
+Import the *sf_libraries.csv* file. 
+
+```{r chunk06}
+my_data <- read.csv("./data/sf_libraries.csv")
+
+# View(my_data)
+```
+
+\
+
+**CHALLENGE**: What type of R object does `read.csv()` return?
+
+```{r chunk07}
+
+```
+
+## Saving R Objects to Disk
+
+Any R object can be saved to disk in a special native R format, which you can load back into R. 
+
+Create 1000 random values using the random number function of your choice (e.g., `rnorm()`).
+
+```{r chunk08}
+rnd_vals <- rnorm(1000) * 20
+```
+
+\
+
+**CHALLENGE**: Create a histogram of the values.
+
+```{r chunk09}
+
+```
+
+Save your random numbers to your 'Home' directory using `save()`:
+
+```{r chunk10}
+save(rnd_vals, file="~/my_random_numbers.RData")
+```
+
+## End
+
+Congratulations, you have completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar. If
+
+

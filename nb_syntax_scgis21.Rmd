@@ -1,0 +1,72 @@
+---
+title: "R Syntax Review"
+output: html_notebook
+---
+
+# Using R Like a Calculator
+
+Compute the square root of 1000. [Answer](http://bit.ly/3vwTGE1)
+
+```{r chunk01}
+# Your answer here
+
+```
+
+Write an expression that will return the area of a circle with radius = 2. [Answer](http://bit.ly/38OgpBY)
+
+Hint: circle area = pi * r squared
+
+```{r chunk02}
+# Your answer here
+
+```
+
+Create a variable named x, and assign it a numeric value. Then write an expression that returns the circumference of a circle with radius = x. [Answer](http://bit.ly/3cDEHj7)
+
+Hint: circumference of a circle = 2 x pi x radius
+
+```{r chunk03}
+x <- 3
+
+# circle circumference:
+
+```
+
+Create two numeric variables x and y, then add them together. [Answer](http://bit.ly/3twiXML)
+
+```{r chunk04}
+# Your answer here
+
+```
+
+What happens if you add a number variable to a character variable? [Answer](http://bit.ly/3eOgadJ)
+
+```{r chunk05}
+x <- 1
+y <- "bandana"
+# x + y
+```
+
+NOTE: YOU WON'T BE ABLE TO SAVE A R NOTEBOOK THAT HAS CODE CHUNKS THAT PRODUCE ERRORS.
+COMMENT OUT ANY LINES OF CODE THAT GENERATE ERRORS BEFORE PROCEEDING.
+
+# Syntax Rules
+
+Fix this code (uncomment it first). [Answer](http://bit.ly/3rXcLx3)
+
+```{r chunk06}
+r <- 10
+
+# circle_diameter <- R * 2
+
+# circle_area >- pi * r ^ 2
+
+```
+
+# End
+
+Congratulations on finishing the Notebook! Save it (again).
+
+Click on the 'Preview' button in the RStudio toolbar to save a copy of your work as HTML.
+
+

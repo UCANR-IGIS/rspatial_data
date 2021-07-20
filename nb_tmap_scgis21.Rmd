@@ -1,0 +1,176 @@
+---
+title: "Make a Map of Yosemite"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+`tmap` is a package for making thematic maps. In this Notebook, we'll use `tmap` to make a map that includes the Yosemite:
+
+- park boundary  
+- roads  
+- cell towers  
+- campgrounds
+
+We'll make two versions of the map - a traditional static map and an interactive map.
+
+## Import all the layers
+
+First, import the park boundary, cell towers, and roads. At the same time, we'll (re)project everything into UTM 11N WGS 84.
+
+```{r chunk01}
+library(sf)
+library(dplyr)
+
+epsg_utm11n_wgs84 <- 32611
+
+## Park boundary
+yose_bnd_utm <- st_read(dsn="./data", layer="yose_boundary") %>% 
+  st_transform(epsg_utm11n_wgs84)
+
+## Roads
+yose_roads_utm <- st_read("./data/yose_roads.gdb", "Yosemite_Roads") %>% 
+  st_transform(epsg_utm11n_wgs84)
+
+## Cell towers
+gdb_fn <- "./data/yose_communications.gdb"; file.exists(gdb_fn)  ## two commands separated by ;
+yose_celltwrs_utm <- st_read(gdb_fn, "Cell_Towers") %>% 
+  st_transform(epsg_utm11n_wgs84)
+
+## Campsites
+yose_campgrounds_utm <- st_read(dsn="./data", layer="yose_poi") %>% 
+  st_transform(epsg_utm11n_wgs84) %>% 
+  filter(POITYPE == "Campground")
+```
+
+## CHALLENGE: How many cell towers & campgrounds
+
+How many cell towers are there? How many campgrounds are there? [Answer](https://bit.ly/3kyFMOT)
+
+```{r chunk02}
+# Your answer here
+
+```
+
+## Map the Park Boundary
+
+Let's start with a simple map of just the park boundary:
+
+```{r chunk03}
+library(tmap)
+tmap_mode("plot")
+
+tm_shape(yose_bnd_utm) + tm_polygons()
+```
+
+Now make the fill and outline dark green, the fill 20% transparent (alpha = 0), the border line a little thicker (lwd = 2):
+
+```{r chunk04}
+tm_shape(yose_bnd_utm) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2)
+```
+
+Next, we'll add a title by adding `tm_layout()` to our tmap object:
+
+```{r chunk05}
+tm_shape(yose_bnd_utm) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2) +
+tm_layout(main.title = "Yosemite NP Cell Towers")
+```
+
+## CHALLENGE: Add a scale bar
+
+Add a scale bar to the map. Hint: add `tm_scale_bar()` to the map. [Answer](https://bit.ly/3hWmDVv)
+
+```{r chunk06}
+# Your answer here
+
+```
+
+## Add the Roads and the Cell Towers
+
+Next we'll add the roads. This requires tacking on another `tm_shape()`, followed by a function that draws lines.
+
+```{r chunk07}
+tm_shape(yose_bnd_utm) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2) +
+tm_shape(yose_roads_utm) +
+  tm_lines(col = "gray50")
+```
+
+In a similar fashion, we'll add the cell towers as little blue dots:
+
+```{r chunk08}
+tm_shape(yose_bnd_utm) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2) +
+tm_shape(yose_roads_utm) +
+  tm_lines(col = "gray50") +
+tm_shape(yose_celltwrs_utm) +
+  tm_symbols(col = "blue", size = 0.5)
+```
+
+## CHALLENGE: Add the campgrounds 
+
+Add the campgrounds to the map as little red dots. Hint: you can render point layers with `tm_symbols()` or `tm_dots()`. [Answer](https://bit.ly/3hQjvdD)
+
+```{r chunk09}
+# Your answer here
+
+```
+
+## Make an interactive map
+
+We can switch to 'interactive map mode' by running `tmap_mode()`:
+
+```{r chunk10}
+tmap_mode("view")
+
+## tmap_mode("plot")  # go back to plot mode
+```
+
+Now that we're in 'view' mode, tmap objects be rendered as little interactive maps. We can 'redraw' the last tmap object using `tmap_last()`:
+
+```{r chunk11}
+tmap_last()
+```
+
+Switch-out the basemap:
+
+```{r chunk12}
+tm_shape(yose_bnd_utm %>% st_geometry()) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2) +
+tm_shape(yose_roads_utm %>% st_geometry()) +
+  tm_lines(col = "gray50") +
+tm_shape(yose_celltwrs_utm %>% st_geometry()) +
+  tm_symbols(col = "blue", size = 0.5) +
+tm_shape(yose_campgrounds_utm %>% st_geometry()) +
+  tm_symbols(col = "red", size = 0.5) +
+  tm_basemap("Esri.WorldTopoMap")
+```
+
+## Configure Pop-ups
+
+Lastly we'll disable interactivity (i.e., hover-over text and popup windows) on all layers except for the campgrounds: 
+
+```{r chunk13}
+tm_shape(yose_bnd_utm %>% st_geometry()) + 
+  tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2, interactive = FALSE) +
+tm_shape(yose_roads_utm %>% st_geometry()) +
+  tm_lines(col = "gray50", interactive = FALSE) +
+tm_shape(yose_celltwrs_utm %>% st_geometry()) +
+  tm_symbols(col = "blue", size = 0.5, interactive = FALSE) +
+tm_shape(yose_campgrounds_utm %>% select(POINAME)) +
+  tm_symbols(col = "red", size = 0.5, id = "POINAME") +
+  tm_basemap("Esri.WorldTopoMap")
+```
+
+Tip: for more control over pop-ups, use leaflet.
+
+## End
+
+Congratulations, you have completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar. If
+
+

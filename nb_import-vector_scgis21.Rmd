@@ -1,0 +1,311 @@
+---
+title: "Import Vector Data"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+This Notebook will demonstrate how to import various types of vector GIS data into R.
+
+## View Layers for Yosemite National Park
+
+First let's look at layers in the data folder, by passing the directory to `st_layers()` from the `sf` package. This will show us the Shapefiles but not layers that are in 'containers', like file geodatabases, geojson files, etc.
+
+```{r chunk01}
+library(sf)
+
+## View spatial layers in the data folder.
+st_layers("./data")
+```
+
+\
+
+## Import a Shapefile
+
+Import the 'yose_boundary' layer (a Shapefile)
+
+```{r chunk03}
+yose_bnd_ll <- st_read(dsn="./data", layer="yose_boundary")
+
+# This also works:
+# yose_bnd_ll <- st_read(dsn="./data/yose_boundary.shp")
+```
+
+Note 1: we don't need to add the .shp extension
+
+Note 2: this code is using convention to name variables *yose_bnd_ll*.
+
+`yose` - all Yosemite layers start with this  
+`bnd` - tell me this the park boundary  
+`ll` - lat-long coordinates  
+
+\
+
+## CHALLENGE: View the Object class
+
+Write an expression that returns the class (type) of *yose_bnd_ll*. [Answer](http://bit.ly/39cVjNZ)
+
+```{r chunk04}
+## Your answer here
+
+```
+We see that `yose_bnd_ll` is both a sf object (simple feature data frame) as well as a data.frame. This means we should be able to use the functions designed for either of those objects.
+
+View the properties of *yose_bnd_ll* by simply running it by itself:
+
+```{r chunk05}
+yose_bnd_ll
+```
+
+\
+
+## CHALLENGE: Which CRS?
+
+What coordinate reference system is *yose_bnd_ll* in? [Answer](http://bit.ly/38UY2ve)
+
+
+
+## View the Attribute Table
+
+The `names()` function returns the column labels of a data frame (in this case the attribute table).
+
+```{r chunk06}
+## View column names in the attribute table
+names(yose_bnd_ll)
+```
+
+Take note of the last column - `geometry`. That's where the geometry is saved (we'll come back to that later).
+
+View the first few rows of the attribute table with `head()`:
+
+```{r chunk07}
+head(yose_bnd_ll)
+```
+
+
+## Plot the Yosemite Boundary
+
+To plot just the geometry of a sf object (i.e., no symbology from the attribute table), we can use the `st_geometry()` function.
+
+```{r chunk08}
+## Plot the geometry (outline) of the Yosemite boundary
+plot(yose_bnd_ll %>% st_geometry(), asp=1)
+```
+
+\
+
+## CHALLENGE: Add Axes
+
+Add `axes=TRUE` to your plot() statement. [Answer](http://bit.ly/3lwqo48)
+
+```{r chunk09}
+
+```
+
+
+\
+
+## CHALLENGE: Import and Plot POIs
+
+Import the Yosemite Points-of-Interest (POI) Shapefile and plot them. [Answer](http://bit.ly/3cSAEQi)
+
+```{r chunk10}
+
+```
+
+
+## Import a KML
+
+kml & kmz files can have more than one layer. Hence the source is the kml file, and you must specify the layer by name.
+
+Import a kml containing the National Register of Historic Places in Yosemite in Yosemite. First find the KML file:
+
+```{r chunk11}
+## Import KML file
+kml_fn <- "./data/yose_historic_pts.kml"
+file.exists(kml_fn)
+```
+
+View the layers within this KML:
+
+```{r chunk12}
+## View the layers in this kml
+st_layers(kml_fn)
+```
+
+Import:
+
+```{r chunk13}
+## Import the 'yosem_historic_places' layer 
+yose_hp_ll <- st_read(kml_fn, layer="yose_historic_places")
+```
+
+View its properties:
+
+```{r chunk14}
+## View properties
+yose_hp_ll
+```
+
+## Plot the Historic Places on top of the Park Boundary
+
+Remember to overlay more than one layer on a plot:
+
+- both layers must have the same CRS   
+- include add=TRUE to the plot statements  
+
+```{r chunk15}
+## Plot the boundary, then the historic places
+{plot(yose_bnd_ll %>% st_geometry(), asp=1)
+plot(yose_hp_ll %>% st_geometry(), add=TRUE)}
+```
+
+## Import a GeoJSON file
+
+Import the California county boundaries, which is saved as a GeoJSON file.
+
+```{r chunk16}
+## Import a Geojson file
+counties_fn <- "./data/ca_counties.geojson"
+file.exists(counties_fn)
+```
+
+View the layers in this GeoJSON file:
+
+```{r chunk17}
+## View the layers 
+st_layers(counties_fn)
+```
+
+Import the 'ca_counties' layer:
+
+```{r chunk18}
+## Import the 'ca_counties' layer 
+ca_counties_ll <- st_read(counties_fn)
+```
+
+\
+
+## CHALLENGE: Plot Counties
+
+Plot the county boundaries. [Answer](http://bit.ly/38YeWJs)
+
+```{r chunk19}
+
+```
+
+## Import from a Geodatabase
+
+You can import (but not write to) an ESRI file geodatabase using the sf package. In this case, the source is the folder containing the geodatabase.
+
+Import the Yosemite’s trails from a geodatabase. First find the gdb file:
+
+```{r chunk20}
+## Define the path to the file geodatabase (a folder)
+gdb_fn <- "./data/yose_trails.gdb"
+file.exists(gdb_fn)
+```
+
+View the layers in this source:
+
+```{r chunk21}
+st_layers(gdb_fn)
+```
+
+Import the 'Trails' layer
+
+```{r chunk22}
+## Import the 'Trails' layer  (case sensitive!)
+yose_trails <- st_read(gdb_fn, layer="Trails")
+```
+
+Plot Yosemite’s Trails:
+
+```{r chunk23}
+## Plot the trails layer
+plot(st_geometry(yose_trails), axes=TRUE)
+```
+
+\
+
+## CHALLENGE: Diagnose a Bad Plot
+
+The following code does **not** work to make a plot of the park boundary and the trails. Can you tell why? [Answer](http://bit.ly/3eSGOlZ)
+
+
+
+
+```{r chunk24}
+{plot(yose_bnd_ll %>% st_geometry())
+plot(yose_trails %>% st_geometry(), add=TRUE)}
+```
+
+## Import from a GeoPackage
+
+Let’s import Yosemite’s watersheds from a geopackage file.
+
+```{r chunk25}
+## Import watersheds from a geopackage
+gpkg_watershd_fn <- "./data/yose_watersheds.gpkg"
+file.exists(gpkg_watershd_fn)
+st_layers(gpkg_watershd_fn)
+yose_watersheds <- st_read(gpkg_watershd_fn, layer="calw221")
+```
+
+Plot the watersheds:
+
+```{r chunk26}
+plot(st_geometry(yose_watersheds), axes=TRUE)
+```
+
+\
+
+## CHALLENGE: What CRS?
+
+What CRS are the Yosemite watersheds in? [Answer](http://bit.ly/38XePO7)
+
+**ANS**. California Equal Albers (a common projection for statewide data in California)
+
+```{r chunk27}
+
+```
+
+\
+
+## Import a CSV file
+
+Import a CSV file containing missing persons records. Step 1 is to import it as a data frame:
+
+```{r chunk28}
+## Import missing people csv file
+missing_df <- read.csv("./data/yosemite_missing_people.csv", stringsAsFactors = FALSE)
+tibble::glimpse(missing_df)
+```
+
+Step 2 is to convert it to a sf data frame. We can surmise from the column names that the coordinates are geographic. We don't know precisely which datum, but passing crs=4326 (WGS84) will be close enough.
+
+```{r chunk29}
+## Convert to sf and plot
+yose_missing_ll <- st_as_sf(missing_df, coords=c("Long", "Lat"), crs=4326)
+```
+
+Plot to make sure:
+
+```{r chunk 30}
+{plot(yose_bnd_ll %>% st_geometry(), col=NA, border="chartreuse4", lwd=3, main = "Missing Persons!")
+plot(yose_missing_ll %>% st_geometry(), pch=16, cex=0.5, add=TRUE)}
+```
+
+\
+
+## CHALLENGE: Import another Layer
+
+Look at the other GIS files in the data folder. Select one, import it, and plot it.
+
+```{r chunk31}
+## Your answer here
+```
+
+
+
