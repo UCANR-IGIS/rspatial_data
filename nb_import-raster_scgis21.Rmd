@@ -12,7 +12,7 @@ This Notebook will demonstrate how to import raster GIS data into R.
 
 Because Landsat images are multi-band we import them using the `brick()`:
 
-```{r}
+```{r chunk01}
 library(raster)
 yose_l8_rst <- raster::brick("./data/yose_l8_20180822_b2345.tif")
 yose_l8_rst
@@ -20,7 +20,7 @@ yose_l8_rst
 
 View a summary of the bands:
 
-```{r}
+```{r chunk02}
 summary(yose_l8_rst)
 ```
 We can tell from the values that Landsat pixel values are 16-bit (0..65536). Remind ourselves of the band combinations for Landsat 8:
@@ -31,22 +31,33 @@ We can tell from the values that Landsat pixel values are 16-bit (0..65536). Rem
 
 Plot a Pseudo True Color:
 
-```{r}
-plotRGB(yose_l8_rst, r=3, g=2, b=1)
+```{r chunk03}
+plotRGB(yose_l8_rst, r=3, g=2, b=1, scale = 2 ^ 16)
 ```
 
+Isn't that awful? The problem is the range of brightness values is fairly narrow. The Landsat sensor isn't like the camera in your phone, which artificially stretches values to make them look pleasing to the eye.
+
+To make it look better, we can pass the `stretch` argument to have it make a contrast stretch:
+
+```{r chunk04}
+plotRGB(yose_l8_rst, r=3, g=2, b=1, scale = 2 ^ 16, stretch = 'lin')
+```
+
+\
 
 Plot a False Color Composite:
 
-```{r}
-plotRGB(yose_l8_rst, r=4, g=3, b=2)
+```{r chunk05}
+plotRGB(yose_l8_rst, r=4, g=3, b=2, scale = 2 ^ 16, stretch = 'lin')
 ```
+
+You can do a lot more with satellite imagery using [RStoolbox](https://bleutner.github.io/RStoolbox/rstbx-docu/spectralIndices.html).
 
 ## Plot it with tmap
 
 To overlay the park boundary, we'll use tmap:
 
-```{r}
+```{r chunk06}
 library(sf)
 library(tmap)
 epsg_utm11n_wgs84 <- 32611
@@ -59,4 +70,11 @@ tm_shape(yose_bnd_utm) +
   tm_borders(col="red", lwd=2) +
 tm_layout(legend.show = FALSE)
 ```
+
+## End
+
+Congratulations, you've completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
 

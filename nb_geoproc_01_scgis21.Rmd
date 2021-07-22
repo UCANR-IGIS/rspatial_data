@@ -83,15 +83,21 @@ tm_shape(yose_bnd_utm) +
   tm_borders(col="red", lwd=3)
 ```
 
-**CHALLENGE** Compute the watershed areas, and add them as a new column in the attribute table. [Answer](https://bit.ly/3dov9Zw)
+## CHALLENGE: Compute the watershed areas
+
+Compute the watershed areas, and add them as a new column in the attribute table. [Answer](https://bit.ly/3dov9Zw)
 
 ```{r chunk07}
+# Your answer here
 
 ```
 
-**CHALLENGE** Find the largest watershed, and report the area in acres. [Answer](https://bit.ly/3uaY4HE)
+## CHALLENGE: Find the largest watershed
+
+Find the largest watershed, and report the area in acres. [Answer](https://bit.ly/3uaY4HE)
 
 ```{r chunk08}
+# Your answer here
 
 ```
 
@@ -111,9 +117,12 @@ yose_roads_utm <- yose_roads_utm %>%
 yose_roads_utm %>% slice(1:10) %>% as_tibble()
 ```
 
-**CHALLENGE** Find the total length for each type of Road (see YOSE_Type) in miles. [Answer](https://bit.ly/3wbbLbb)
+## CHALLENGE: Compute Road Lengths
+
+Find the total length for each type of Road (see YOSE_Type) in miles. [Answer](https://bit.ly/3wbbLbb)
 
 ```{r chunk11}
+# Your answer here
 
 ```
 
@@ -163,11 +172,14 @@ cgct_dist_mat <- st_distance(yose_campgrounds_utm, yose_celltwrs_utm)
 cgct_dist_mat
 ```
 
-**CHALLENGE** For the first campground (row), which is the closest cell tower? [Answer](https://bit.ly/3webTXp)
+## CHALLENGE: Find the closest cell tower
+
+For the first campground (row), which is the closest cell tower? [Answer](https://bit.ly/3webTXp)
 
 Hint: use `which.min()`
 
 ```{r chunk16}
+# Your answer here
 
 ```
 
