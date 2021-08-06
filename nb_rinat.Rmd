@@ -1,0 +1,152 @@
+---
+title: "Import and Map iNaturalist Observations"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+In this Notebook, we'll learn how to import observations from [iNaturalist](https://www.inaturalist.org/) using the [rinat](https://docs.ropensci.org/rinat/) package.
+
+## Load Packages
+
+The first step is to load the packages we'll need. These are all on CRAN if you need to install any.
+
+```{r chunk01, message = FALSE}
+library(rinat)
+library(sf)
+library(dplyr)
+library(tmap)
+library(leaflet)
+
+## Load the conflicted package and set preferences
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+## Import the Park Boundary
+
+Next, we import the boundary of Yosemite and grab its bounding box. We'll use this later when we call iNaturalist to specify that we're we're only interested in observations in this area.
+
+```{r chunk02}
+## Import the YNP Boundary
+yose_bnd_ll <- sf::st_read(dsn="./data", layer="yose_boundary")
+
+## Get the bounding box
+yose_bnd_bb <- st_bbox(yose_bnd_ll)
+as.numeric(yose_bnd_bb)
+```
+
+## Retrieve Recent iNat Observations
+
+Next, we can retrieve observations within the bounding box of the park. By default, the `get_inat_obs()` will return the most recent 100 observations:
+
+```{r chunk03}
+## Retrieve the first 100 iNaturalist observations within the bounding box. 
+## Note we have to rearrange the coordinates of the bounding box a little bit to 
+## give get_inat_obs() what it expects
+
+yose_inat_df <- get_inat_obs(bounds = yose_bnd_bb[c(2,1,4,3)])
+```
+
+Inspect the results:
+
+```{r chunk04}
+dim(yose_inat_df)
+head(yose_inat_df)
+```
+
+In order to plot these observations, let's first convert the data frame into a sf object:
+
+```{r chunk05}
+yose_inat_sf <-  yose_inat_df %>% 
+  select(longitude, latitude, datetime, common_name, scientific_name, user_login) %>% 
+  st_as_sf(coords=c("longitude", "latitude"),  crs=4326)
+yose_inat_sf
+```
+
+## Plot with tmap
+
+```{r chunk06}
+tmap_mode("view")
+
+tm_shape(yose_bnd_ll) + 
+  tm_borders(col = "red", lwd = 2) +
+tm_shape(yose_inat_sf) + 
+  tm_symbols()
+```
+
+## Add a Taxon to the Query 
+
+Next we'll a taxon to our query. Yosemite has some endemic toads. We can tell iNaturalist we only only want certain species using the optional taxon_name argument. Here we'll set it to  [*Bufonidae*](https://amphibiaweb.org/lists/Bufonidae.shtml) (the toad family). 
+
+```{r chunk07}
+yose_toads_df <- get_inat_obs(bounds = yose_bnd_bb[c(2,1,4,3)],
+                              taxon_name = "Bufonidae")
+dim(yose_toads_df)
+glimpse(yose_toads_df, width = 110)
+```
+
+## Convert the toads df to sf
+
+Before we can plot it, we'll convert the toads layer to a sf object. At the same time, we'll reduce the number of columns to just those we want to include on the map.
+
+```{r chunk08}
+yose_toads_sf <-  yose_toads_df %>% 
+  select(longitude, latitude, datetime, common_name, scientific_name, image_url, user_login) %>% 
+  st_as_sf(coords=c("longitude", "latitude"),  crs=4326)
+
+yose_toads_sf
+```
+
+## Plot the toads with leaflet
+
+We'll make the interactive map with leaflet, instead of tmap, because leaflet gives us more control over the popup windows.
+
+The first step is to add a column to the sf object that contains the HTML code that will appear in the popup windows. We'll add this column using mutate, and the save the result as a new sf object:
+
+```{r chunk09}
+## Add a column containing HTML that will appear in the popup windows
+yose_toads_popup_sf <- yose_toads_sf %>% 
+  mutate(popup_html = paste0("<p><b>", common_name, "</b><br/>",
+                             "<i>", scientific_name, "</i></p>",
+                             "<p>Observed: ", datetime, "<br/>",
+                             "User: ", user_login, "</p>",
+                             "<p><img src='", image_url, "' style='width:100%;'/></p>")
+  )
+```
+
+## Inspect the Popup HTML 
+
+This is what the HTML code looks like for the first feature:
+
+```{r chunk10}
+yose_toads_popup_sf$popup_html[1]
+```
+
+Make the map
+
+```{r chunk11}
+leaflet(yose_toads_popup_sf) %>% 
+  addTiles() %>% 
+  addCircleMarkers(popup = ~popup_html, radius = 5)
+```
+
+
+## CHALLENGE: Download and map iNaturalist Observations for the taxon of your choice
+
+Search for iNaturalist observations for your favorite Yosemite animal or plant by passing a Family, Genus or Species to `get_inat_obs()`. You could specify for example *Ursidae* (bears), *Sequoiadendron* (Sequoia), or *Lilium* (lilies). [Answer](https://bit.ly/3rETXmX)
+
+```{r chunk12}
+# Your answer here
+
+```
+
+## End
+
+Congratulations, you've completed the Notebook! 
+
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
