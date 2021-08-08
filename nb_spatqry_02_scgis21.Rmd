@@ -1,0 +1,264 @@
+---
+title: "Spatial Queries - Sample Park Vegetation with Random Points"
+output: 
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+```{css echo = FALSE}
+h1,h2 {font-weight:bold;}
+```
+
+In this Notebook we'll use geoprocessing functions  from `sf` to:
+
+- generate 500 randomly distributed sample points within YNP
+- identify the vegetation class for sample point and save it in the attribute table  
+- find all sample points within 2km of each campground, and compute their distances to the campground
+
+## Setup
+
+Load the packages we'll need and set tmap mode to 'plot':
+
+```{r chunk01, message = FALSE}
+library(sf)
+library(tibble)
+library(tmap)
+tmap_mode("plot")
+```
+
+Load `dplyr` and set name conflict preferences:
+
+```{r chunk02, message = FALSE}
+library(dplyr)
+
+## Load the conflicted package
+library(conflicted)
+
+# Set conflict preferences
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("count", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+conflict_prefer("arrange", "dplyr", quiet = TRUE)
+```
+
+\
+
+## Import the Park Boundary
+
+First, we import the boundary:
+
+```{r chunk03}
+## Define a convenience variable for UTM Zone 11
+epsg_utm11n_nad83 <- 26911
+
+## Import the YNP border
+yose_bnd_utm <- st_read(dsn="./data", layer="yose_boundary") %>% 
+  st_transform(epsg_utm11n_nad83)
+```
+
+\
+
+## Generate Random Points
+
+Next, generate uniformly distributed random numbers between the x and y ranges of the park's extent (i.e., bounding box). We'll generate more points than we actually needed knowing that some of them will fall outside the park boundary. 
+
+```{r chunk04}
+n <- 500
+
+## Get the Extent of the park boundary
+yose_ext <- st_bbox(yose_bnd_utm)
+yose_ext
+
+## Generate uniformly distributed random numbers
+xs <- runif(n * 3, min = yose_ext[1], max = yose_ext[3])
+ys <- runif(n * 3, min = yose_ext[2], max = yose_ext[4])
+```
+
+\
+
+Create a sf object from the random points
+
+```{r chunk05}
+rand_pts_sf <- st_as_sf(data.frame(lon = xs, lat = ys, ptid = 1:length(xs)), 
+                     coords = c("lon", "lat"), 
+                     crs = st_crs(yose_bnd_utm))
+
+## Plot to verify
+tm_shape(rand_pts_sf) + 
+  tm_dots(col = "dimgray") +
+tm_shape(yose_bnd_utm) +
+  tm_borders(col = "red", lwd = 2)
+```
+
+Next, test which points fall within the park boundary, and save those to a new object.
+
+```{r chunk06}
+## Test which points are within the YNP boundary
+in_yose_mat <- st_within(rand_pts_sf, yose_bnd_utm, sparse = FALSE)
+head(in_yose_mat)
+
+## Save those in the park to a new sf object
+pts_in_park_sf <- rand_pts_sf %>% filter(in_yose_mat[,1])
+nrow(pts_in_park_sf)
+```
+
+\
+
+Plot the results:
+
+```{r chunk07}
+tm_shape(yose_bnd_utm) + 
+  tm_borders(col="palegreen4", lwd = 3) +
+tm_shape(pts_in_park_sf) + 
+  tm_dots(col="dimgray")
+```
+
+\
+
+Lastly, all we need is 500 points, so take a random sample:
+
+```{r chunk08}
+## Take a random sample of the points 
+yose_sample_pts_utm <- pts_in_park_sf %>% 
+  sample_n(n)
+
+## Plot
+tm_shape(yose_bnd_utm) + 
+  tm_borders(col="palegreen4", lwd = 4) +
+tm_shape(yose_sample_pts_utm) + 
+  tm_dots(col="dimgray")
+```
+
+
+\
+
+# Find and Record the Vegetation Class for Each Sample Point
+
+Next we'll use a **spatial join** to do two things at once: 1) find the vegetation type for each sample point, and ii) save it in the attribute table.
+
+First import the vegetation class layer and the legend:
+
+```{r chunk09}
+yose_veg37_utm <- st_read(dsn="./data", layer="veg37") %>% 
+  st_transform(epsg_utm11n_nad83) %>% 
+  select(DOMINANT, ALLIANCE, RIM_CODE)
+
+## Import the legend for the vegetation layer (saved separately)
+yose_veg37_legend_df <- foreign::read.dbf("./data/veg37_alliances.dbf")
+
+## Join the legend to the sf data frame on the 'ALLIANCE' column
+yose_veg37leg_utm <- yose_veg37_utm %>% 
+  left_join(yose_veg37_legend_df, by = "ALLIANCE")
+
+yose_veg37leg_utm %>% slice(1:10) %>% as_tibble()
+```
+
+\
+
+Plot the vegetation layer:
+
+```{r chunk10}
+tmap_options(max.categories = 31)
+
+tm_shape(yose_bnd_utm) + 
+  tm_borders(col="palegreen4", lwd = 4) +
+tm_shape(yose_veg37leg_utm) + 
+  tm_fill("ALLIANCE") +
+tm_layout(legend.outside = TRUE)
+
+```
+
+Now we're ready to spatially join the sample points to the vegetation layer using `st_join()`. This will add the columns from the vegetation layer to the attribute table of the sample points.
+
+```{r chunk11}
+yose_sample_pts_veg_utm <- yose_sample_pts_utm %>% 
+  st_join(yose_veg37leg_utm)
+
+yose_sample_pts_veg_utm %>% slice(1:10) %>% as_tibble()
+```
+
+\
+
+## CHALLENGE: Plot the sample points
+
+Plot the sample points according to their vegetation class. 
+
+[Answer](https://bit.ly/3u8JvUM)
+
+```{r chunk12}
+## your answer here
+```
+
+\
+
+## Find All Sample Points within 2km of Each Campground
+
+First we import the campgrounds:
+
+```{r chunk13}
+## Import the campground
+yose_campgrounds_utm <- st_read("./data", layer="yose_poi") %>% 
+  st_transform(epsg_utm11n_nad83) %>% 
+  filter(POITYPE == 'Campground') %>% 
+  select(POINAME)
+
+yose_campgrounds_utm
+```
+
+\
+
+To identify the sample points within 2km of each campground, we could construct a buffer around each campground and take the intersection. But there's an easier way - we can do the spatial query directly using `st_is_within_distance()`.
+
+The number of sample points near each campground will vary. Hence we'll save the results in a list (`sparse = TRUE`):
+
+```{r chunk14}
+samp_pts_near_each_campgrnd_lst <- yose_campgrounds_utm  %>% 
+  st_is_within_distance(yose_sample_pts_utm, 2000, sparse = TRUE)
+
+samp_pts_near_each_campgrnd_lst
+```
+
+\
+
+## Compute Distances Between each Campground and its Nearby Sample Points
+
+Finally, We'll compute the distance between each campground and the sample points that lie within 2km. 
+
+To do this, we'll loop through the campgrounds, and for each one we'll use `st_distance()` to find the distance between the campground and the nearby points (whose row numbers are saved in `samp_pts_near_each_campgrnd_lst`) . To complile all the results, we'll append the distances to a data frame each iteration of the loop. 
+
+```{r chunk15}
+## Initialize campgrnd_samppts_dist_df to NULL
+## (we'll use it below to compile and save the results of a loop)
+campgrnd_samppts_dist_df <- NULL
+
+for (i in 1:nrow(yose_campgrounds_utm)) {
+  
+  if (length(samp_pts_near_each_campgrnd_lst[[i]]) > 0) {
+    dist_mat <- st_distance(x = yose_campgrounds_utm %>% slice(i),
+                          y = yose_sample_pts_utm %>% 
+                            slice(samp_pts_near_each_campgrnd_lst[[i]]))
+    
+    ## Create a data frame with the campground rown number, the sample point row numbers, and the distances
+    dist2samppts_df <- data.frame(campgrnd_idx = i,
+                                  samp_pt_idx = samp_pts_near_each_campgrnd_lst[[i]],
+                                  dist = as.numeric(dist_mat[1,]))
+    
+    ## Add these rows to campgrnd_samppts_dist_df
+    campgrnd_samppts_dist_df <- campgrnd_samppts_dist_df %>% 
+      bind_rows(dist2samppts_df)
+    
+  }
+
+}
+
+## View results
+campgrnd_samppts_dist_df
+```
+
+## End
+
+Congratulations, you've completed another Notebook! 
+
+To view your Notebook as HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
+
